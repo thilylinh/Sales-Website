@@ -12,19 +12,23 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LoaiThanhVien
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LoaiThanhVien()
+        public Customer()
         {
-            this.ThanhViens = new HashSet<ThanhVien>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int MaLoaiTV { get; set; }
-        public string TenLoai { get; set; }
-        public Nullable<int> UuDai { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public Nullable<int> IDMember { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThanhVien> ThanhViens { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

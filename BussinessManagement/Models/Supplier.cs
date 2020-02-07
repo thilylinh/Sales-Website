@@ -12,21 +12,25 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PhieuNhap
+    public partial class Supplier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PhieuNhap()
+        public Supplier()
         {
-            this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
+            this.Products = new HashSet<Product>();
+            this.ReceiveVouchers = new HashSet<ReceiveVoucher>();
         }
     
-        public int MaPN { get; set; }
-        public Nullable<int> MaNCC { get; set; }
-        public Nullable<System.DateTime> NgayNhap { get; set; }
-        public Nullable<bool> DaXoa { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string FAX { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
-        public virtual NhaCungCap NhaCungCap { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReceiveVoucher> ReceiveVouchers { get; set; }
     }
 }

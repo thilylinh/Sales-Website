@@ -12,16 +12,16 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietDonDatHang
+    public partial class TheOrderDetail
     {
-        public int MaChiTietDDH { get; set; }
-        public Nullable<int> MaDDH { get; set; }
-        public Nullable<int> MaSp { get; set; }
-        public string TenSp { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public Nullable<decimal> DonGia { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> OrderID { get; set; }
+        public Nullable<int> ProductID { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<int> Amount { get; set; }
+        public Nullable<decimal> Price { get; set; }
     
-        public virtual DonDathang DonDathang { get; set; }
-        public virtual SanPham SanPham { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

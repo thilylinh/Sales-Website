@@ -12,15 +12,14 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietPhieuNhap
+    public partial class Comment
     {
-        public int MaChiTietPN { get; set; }
-        public Nullable<int> MaPN { get; set; }
-        public Nullable<int> MaSp { get; set; }
-        public Nullable<decimal> DonGiaNhap { get; set; }
-        public Nullable<int> SoLuongNhap { get; set; }
+        public int IDComment { get; set; }
+        public string Content { get; set; }
+        public Nullable<int> IDMember { get; set; }
+        public Nullable<int> IDProduct { get; set; }
     
-        public virtual PhieuNhap PhieuNhap { get; set; }
-        public virtual SanPham SanPham { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

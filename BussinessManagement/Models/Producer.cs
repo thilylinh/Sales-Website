@@ -12,20 +12,20 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NhaSanXuat
+    public partial class Producer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NhaSanXuat()
+        public Producer()
         {
-            this.SanPhams = new HashSet<SanPham>();
+            this.Products = new HashSet<Product>();
         }
     
-        public int MaNSX { get; set; }
-        public string TenNSX { get; set; }
-        public string ThongTin { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Information { get; set; }
         public string Logo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SanPham> SanPhams { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

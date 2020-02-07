@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BussinessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="IDComment" />
+          </Key>
+          <Property Name="IDComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="IDMember" Type="int" />
+          <Property Name="IDProduct" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
+          <Property Name="IDMember" Type="int" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="IDTypeMember" Type="int" />
+        </EntityType>
+        <EntityType Name="MemberType">
+          <Key>
+            <PropertyRef Name="IDTypeMember" />
+          </Key>
+          <Property Name="IDTypeMember" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Preferential" Type="int" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="IsPayed" Type="bit" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Preferential" Type="int" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Information" Type="nvarchar" MaxLength="255" />
+          <Property Name="Logo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UpdateDate" Type="date" />
+          <Property Name="Config" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="ViewNumber" Type="int" />
+          <Property Name="VoteNumber" Type="int" />
+          <Property Name="CommentNumber" Type="int" />
+          <Property Name="BuyNumber" Type="int" />
+          <Property Name="IsNew" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="ProducerID" Type="int" />
+          <Property Name="ProductTypeID" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProductType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameTypeProdcut" Type="nvarchar" MaxLength="100" />
+          <Property Name="Icon" Type="nvarchar(max)" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ReceiveVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProducerID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReceiveVoucherDetail">
+          <Key>
+            <PropertyRef Name="IDDetail" />
+          </Key>
+          <Property Name="IDDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiveVoucherID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="int" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone" Type="varchar" MaxLength="12" />
+          <Property Name="FAX" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TheOrderDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_BinhLuan_SanPham">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BinhLuan_ThanhVien">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="IDMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDonDatHang_DonDatHang">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="TheOrderDetail" Type="Self.TheOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="TheOrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDonDatHang_SanPham">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="TheOrderDetail" Type="Self.TheOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TheOrderDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietPhieuNhap_PhieNhap">
+          <End Role="ReceiveVoucher" Type="Self.ReceiveVoucher" Multiplicity="0..1" />
+          <End Role="ReceiveVoucherDetail" Type="Self.ReceiveVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiveVoucher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReceiveVoucherDetail">
+              <PropertyRef Name="ReceiveVoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietPhieuNhap_SanPham">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ReceiveVoucherDetail" Type="Self.ReceiveVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReceiveVoucherDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DonDathang_KhachHang">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhachHang_ToTable">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IDMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuNhap_ToTable">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiveVoucher" Type="Self.ReceiveVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReceiveVoucher">
+              <PropertyRef Name="ProducerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_LoaiSanPham">
+          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProductTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_NhaCungCap">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_NhaSanXuat">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProducerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThanhVien_ToTable">
+          <End Role="MemberType" Type="Self.MemberType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberType">
+              <PropertyRef Name="IDTypeMember" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="IDTypeMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BussinessModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberType" EntityType="Self.MemberType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiveVoucher" EntityType="Self.ReceiveVoucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiveVoucherDetail" EntityType="Self.ReceiveVoucherDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheOrderDetail" EntityType="Self.TheOrderDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BinhLuan_SanPham" Association="Self.FK_BinhLuan_SanPham">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDonDatHang_DonDatHang" Association="Self.FK_ChiTietDonDatHang_DonDatHang">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="TheOrderDetail" EntitySet="TheOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDonDatHang_SanPham" Association="Self.FK_ChiTietDonDatHang_SanPham">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="TheOrderDetail" EntitySet="TheOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietPhieuNhap_PhieNhap" Association="Self.FK_ChiTietPhieuNhap_PhieNhap">
+            <End Role="ReceiveVoucher" EntitySet="ReceiveVoucher" />
+            <End Role="ReceiveVoucherDetail" EntitySet="ReceiveVoucherDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietPhieuNhap_SanPham" Association="Self.FK_ChiTietPhieuNhap_SanPham">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ReceiveVoucherDetail" EntitySet="ReceiveVoucherDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DonDathang_KhachHang" Association="Self.FK_DonDathang_KhachHang">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhachHang_ToTable" Association="Self.FK_KhachHang_ToTable">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuNhap_ToTable" Association="Self.FK_PhieuNhap_ToTable">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="ReceiveVoucher" EntitySet="ReceiveVoucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_LoaiSanPham" Association="Self.FK_SanPham_LoaiSanPham">
+            <End Role="ProductType" EntitySet="ProductType" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_NhaCungCap" Association="Self.FK_SanPham_NhaCungCap">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_NhaSanXuat" Association="Self.FK_SanPham_NhaSanXuat">
+            <End Role="Producer" EntitySet="Producer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThanhVien_ToTable" Association="Self.FK_ThanhVien_ToTable">
+            <End Role="MemberType" EntitySet="MemberType" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BussinessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="IDComment" />
+          </Key>
+          <Property Name="IDComment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDMember" Type="Int32" />
+          <Property Name="IDProduct" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Comment" ToRole="Product" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Comment" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="IDMember" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_DonDathang_KhachHang" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_KhachHang_ToTable" FromRole="Customer" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDTypeMember" Type="Int32" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Member" ToRole="Comment" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_KhachHang_ToTable" FromRole="Member" ToRole="Customer" />
+          <NavigationProperty Name="MemberType" Relationship="Self.FK_ThanhVien_ToTable" FromRole="Member" ToRole="MemberType" />
+        </EntityType>
+        <EntityType Name="MemberType">
+          <Key>
+            <PropertyRef Name="IDTypeMember" />
+          </Key>
+          <Property Name="IDTypeMember" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Preferential" Type="Int32" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_ThanhVien_ToTable" FromRole="MemberType" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="IsPayed" Type="Boolean" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Preferential" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_DonDathang_KhachHang" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="TheOrderDetails" Relationship="Self.FK_ChiTietDonDatHang_DonDatHang" FromRole="Order" ToRole="TheOrderDetail" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Information" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_SanPham_NhaSanXuat" FromRole="Producer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="Config" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="ViewNumber" Type="Int32" />
+          <Property Name="VoteNumber" Type="Int32" />
+          <Property Name="CommentNumber" Type="Int32" />
+          <Property Name="BuyNumber" Type="Int32" />
+          <Property Name="IsNew" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="ProducerID" Type="Int32" />
+          <Property Name="ProductTypeID" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Product" ToRole="Comment" />
+          <NavigationProperty Name="Producer" Relationship="Self.FK_SanPham_NhaSanXuat" FromRole="Product" ToRole="Producer" />
+          <NavigationProperty Name="TheOrderDetails" Relationship="Self.FK_ChiTietDonDatHang_SanPham" FromRole="Product" ToRole="TheOrderDetail" />
+          <NavigationProperty Name="ReceiveVoucherDetails" Relationship="Self.FK_ChiTietPhieuNhap_SanPham" FromRole="Product" ToRole="ReceiveVoucherDetail" />
+          <NavigationProperty Name="ProductType" Relationship="Self.FK_SanPham_LoaiSanPham" FromRole="Product" ToRole="ProductType" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_SanPham_NhaCungCap" FromRole="Product" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="ProductType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameTypeProdcut" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_SanPham_LoaiSanPham" FromRole="ProductType" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ReceiveVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProducerID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="ReceiveVoucherDetails" Relationship="Self.FK_ChiTietPhieuNhap_PhieNhap" FromRole="ReceiveVoucher" ToRole="ReceiveVoucherDetail" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_PhieuNhap_ToTable" FromRole="ReceiveVoucher" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="ReceiveVoucherDetail">
+          <Key>
+            <PropertyRef Name="IDDetail" />
+          </Key>
+          <Property Name="IDDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiveVoucherID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ChiTietPhieuNhap_SanPham" FromRole="ReceiveVoucherDetail" ToRole="Product" />
+          <NavigationProperty Name="ReceiveVoucher" Relationship="Self.FK_ChiTietPhieuNhap_PhieNhap" FromRole="ReceiveVoucherDetail" ToRole="ReceiveVoucher" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_SanPham_NhaCungCap" FromRole="Supplier" ToRole="Product" />
+          <NavigationProperty Name="ReceiveVouchers" Relationship="Self.FK_PhieuNhap_ToTable" FromRole="Supplier" ToRole="ReceiveVoucher" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TheOrderDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_ChiTietDonDatHang_DonDatHang" FromRole="TheOrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ChiTietDonDatHang_SanPham" FromRole="TheOrderDetail" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_BinhLuan_SanPham">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BinhLuan_ThanhVien">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="IDMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DonDathang_KhachHang">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhachHang_ToTable">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IDMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThanhVien_ToTable">
+          <End Role="MemberType" Type="Self.MemberType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberType">
+              <PropertyRef Name="IDTypeMember" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="IDTypeMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDonDatHang_DonDatHang">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="TheOrderDetail" Type="Self.TheOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="TheOrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_NhaSanXuat">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProducerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietDonDatHang_SanPham">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="TheOrderDetail" Type="Self.TheOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TheOrderDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietPhieuNhap_SanPham">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ReceiveVoucherDetail" Type="Self.ReceiveVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReceiveVoucherDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_LoaiSanPham">
+          <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ProductTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_NhaCungCap">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietPhieuNhap_PhieNhap">
+          <End Role="ReceiveVoucher" Type="Self.ReceiveVoucher" Multiplicity="0..1" />
+          <End Role="ReceiveVoucherDetail" Type="Self.ReceiveVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiveVoucher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReceiveVoucherDetail">
+              <PropertyRef Name="ReceiveVoucherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuNhap_ToTable">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiveVoucher" Type="Self.ReceiveVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ReceiveVoucher">
+              <PropertyRef Name="ProducerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BussinessEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="MemberTypes" EntityType="Self.MemberType" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Producers" EntityType="Self.Producer" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+          <EntitySet Name="ReceiveVouchers" EntityType="Self.ReceiveVoucher" />
+          <EntitySet Name="ReceiveVoucherDetails" EntityType="Self.ReceiveVoucherDetail" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TheOrderDetails" EntityType="Self.TheOrderDetail" />
+          <AssociationSet Name="FK_BinhLuan_SanPham" Association="Self.FK_BinhLuan_SanPham">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DonDathang_KhachHang" Association="Self.FK_DonDathang_KhachHang">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhachHang_ToTable" Association="Self.FK_KhachHang_ToTable">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThanhVien_ToTable" Association="Self.FK_ThanhVien_ToTable">
+            <End Role="MemberType" EntitySet="MemberTypes" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDonDatHang_DonDatHang" Association="Self.FK_ChiTietDonDatHang_DonDatHang">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="TheOrderDetail" EntitySet="TheOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_NhaSanXuat" Association="Self.FK_SanPham_NhaSanXuat">
+            <End Role="Producer" EntitySet="Producers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietDonDatHang_SanPham" Association="Self.FK_ChiTietDonDatHang_SanPham">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="TheOrderDetail" EntitySet="TheOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietPhieuNhap_SanPham" Association="Self.FK_ChiTietPhieuNhap_SanPham">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ReceiveVoucherDetail" EntitySet="ReceiveVoucherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_LoaiSanPham" Association="Self.FK_SanPham_LoaiSanPham">
+            <End Role="ProductType" EntitySet="ProductTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_NhaCungCap" Association="Self.FK_SanPham_NhaCungCap">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietPhieuNhap_PhieNhap" Association="Self.FK_ChiTietPhieuNhap_PhieNhap">
+            <End Role="ReceiveVoucher" EntitySet="ReceiveVouchers" />
+            <End Role="ReceiveVoucherDetail" EntitySet="ReceiveVoucherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuNhap_ToTable" Association="Self.FK_PhieuNhap_ToTable">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="ReceiveVoucher" EntitySet="ReceiveVouchers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BussinessModelStoreContainer" CdmEntityContainer="BussinessEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="BussinessModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="IDComment" ColumnName="IDComment" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="IDMember" ColumnName="IDMember" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BussinessModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IDMember" ColumnName="IDMember" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="BussinessModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="IDTypeMember" ColumnName="IDTypeMember" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberTypes">
+            <EntityTypeMapping TypeName="BussinessModel.MemberType">
+              <MappingFragment StoreEntitySet="MemberType">
+                <ScalarProperty Name="IDTypeMember" ColumnName="IDTypeMember" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+                <ScalarProperty Name="Preferential" ColumnName="Preferential" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="BussinessModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Preferential" ColumnName="Preferential" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producers">
+            <EntityTypeMapping TypeName="BussinessModel.Producer">
+              <MappingFragment StoreEntitySet="Producer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BussinessModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Config" ColumnName="Config" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ViewNumber" ColumnName="ViewNumber" />
+                <ScalarProperty Name="VoteNumber" ColumnName="VoteNumber" />
+                <ScalarProperty Name="CommentNumber" ColumnName="CommentNumber" />
+                <ScalarProperty Name="BuyNumber" ColumnName="BuyNumber" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ProducerID" ColumnName="ProducerID" />
+                <ScalarProperty Name="ProductTypeID" ColumnName="ProductTypeID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="BussinessModel.ProductType">
+              <MappingFragment StoreEntitySet="ProductType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameTypeProdcut" ColumnName="NameTypeProdcut" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiveVouchers">
+            <EntityTypeMapping TypeName="BussinessModel.ReceiveVoucher">
+              <MappingFragment StoreEntitySet="ReceiveVoucher">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProducerID" ColumnName="ProducerID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiveVoucherDetails">
+            <EntityTypeMapping TypeName="BussinessModel.ReceiveVoucherDetail">
+              <MappingFragment StoreEntitySet="ReceiveVoucherDetail">
+                <ScalarProperty Name="IDDetail" ColumnName="IDDetail" />
+                <ScalarProperty Name="ReceiveVoucherID" ColumnName="ReceiveVoucherID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="BussinessModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BussinessModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheOrderDetails">
+            <EntityTypeMapping TypeName="BussinessModel.TheOrderDetail">
+              <MappingFragment StoreEntitySet="TheOrderDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -12,25 +12,20 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NhaCungCap
+    public partial class ProductType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NhaCungCap()
+        public ProductType()
         {
-            this.PhieuNhaps = new HashSet<PhieuNhap>();
-            this.SanPhams = new HashSet<SanPham>();
+            this.Products = new HashSet<Product>();
         }
     
-        public int MaNCC { get; set; }
-        public string TenNCC { get; set; }
-        public string DiaChi { get; set; }
-        public string Email { get; set; }
-        public string SDT { get; set; }
-        public string FAX { get; set; }
+        public int ID { get; set; }
+        public string NameTypeProdcut { get; set; }
+        public string Icon { get; set; }
+        public string Alias { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SanPham> SanPhams { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

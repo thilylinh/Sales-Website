@@ -1,25 +1,26 @@
 ﻿@using BussinessManagement.Models;
-@model IEnumerable<SanPham>
+@model IEnumerable<Product>
 
 <div class=" h_menu4">
     <ul class="memenu skyblue">
-        <li class="active grid"><a class="color8" href="@Url.Action("Index","Home")">Trang chủ</a></li>
-        @foreach (var groupItem in Model.GroupBy(n => n.LoaiSanPham))
+        <li class="active grid"><a class="color8" href="@Url.Action("Index","Home")">Home</a></li>
+
+        @foreach (var groupItem in Model.GroupBy(n => n.ProductType))
         {
             if (groupItem.Key != null)
             {
                 <li>
-                    <a class="color1" href="#">@groupItem.Key.TenLoaiSP</a>
+                    <a class="color1" href="#">@groupItem.Key.NameTypeProdcut</a>
                     <div class="mepanel">
                         <div class="row">
                             <div class="col1">
                                 <div class="h_nav">
                                     <ul>
-                                        @foreach (var item in groupItem.GroupBy(n => n.NhaSanXuat))
+                                        @foreach (var item in groupItem.GroupBy(n => n.Producer))
                                         {
                                             if (item.Key != null)
                                             {
-                                                <li><a href="products.html">@item.Key.TenNSX</a></li>
+                                                <li><a href="products.html">@item.Key.Name</a></li>
                                             }
                                         }
                                     </ul>
@@ -32,22 +33,22 @@
         }
 
         <li class="grid">
-            <a class="color2" href="#">	Thương hiệu</a>
+            <a class="color2" href="#">	Trademark</a>
             <div class="mepanel">
                 <div class="row">
-                    @foreach (var groupItem in Model.GroupBy(n => n.LoaiSanPham))
+                    @foreach (var groupItem in Model.GroupBy(n => n.ProductType))
                     {
                         if (groupItem.Key != null)
                         {
                             <div class="col1">
                                 <div class="h_nav">
-                                    <h4>@groupItem.Key.TenLoaiSP</h4>
+                                    <h4>@groupItem.Key.NameTypeProdcut</h4>
                                     <ul>
-                                        @foreach (var item in groupItem.GroupBy(n => n.NhaSanXuat))
+                                        @foreach (var item in groupItem.GroupBy(n => n.Producer))
                                         {
                                             if (item.Key != null)
                                             {
-                                                <li><a href="products.html">Accessories</a>@item.Key.TenNSX</li>
+                                                <li><a href="products.html">Accessories</a>@item.Key.Name</li>
                                             }
                                         }
                                     </ul>
@@ -59,6 +60,6 @@
             </div>
         </li>
         <li><a class="color4" href="blog.html">Blog</a></li>
-        <li><a class="color6" href="contact.html">Liên hệ</a></li>
+        <li><a class="color6" href="contact.html">Contact</a></li>
     </ul>
 </div>

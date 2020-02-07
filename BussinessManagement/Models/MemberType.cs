@@ -12,20 +12,19 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LoaiSanPham
+    public partial class MemberType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LoaiSanPham()
+        public MemberType()
         {
-            this.SanPhams = new HashSet<SanPham>();
+            this.Members = new HashSet<Member>();
         }
     
-        public int MaLoaiSP { get; set; }
-        public string TenLoaiSP { get; set; }
-        public string Icon { get; set; }
-        public string BiDanh { get; set; }
+        public int IDTypeMember { get; set; }
+        public string NameType { get; set; }
+        public Nullable<int> Preferential { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SanPham> SanPhams { get; set; }
+        public virtual ICollection<Member> Members { get; set; }
     }
 }

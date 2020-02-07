@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
+  <Import Project="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -129,62 +134,63 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BinhLuan.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Bussiness.Context.cs">
+    <Compile Include="Models\BussinessManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Bussiness.Context.tt</DependentUpon>
+      <DependentUpon>BussinessManagement.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bussiness.cs">
+    <Compile Include="Models\BussinessManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Bussiness.tt</DependentUpon>
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bussiness.Designer.cs">
+    <Compile Include="Models\BussinessManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Bussiness.edmx</DependentUpon>
+      <DependentUpon>BussinessManagement.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChiTietDonDatHang.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChiTietPhieuNhap.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DonDathang.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\Member.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\KhachHang.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\MemberType.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoaiSanPham.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoaiThanhVien.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\Producer.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NhaCungCap.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NhaSanXuat.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\ProductType.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhieuNhap.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\ReceiveVoucher.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SanPham.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\ReceiveVoucherDetail.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ThanhVien.cs">
-      <DependentUpon>Bussiness.tt</DependentUpon>
+    <Compile Include="Models\TheOrderDetail.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,28 +250,37 @@
     <Content Include="Content\js\memenu.js" />
     <Content Include="Content\js\responsiveslides.min.js" />
     <Content Include="Content\js\simpleCart.min.js" />
+    <Content Include="Content\ProductImage\camera1.jpg" />
+    <Content Include="Content\ProductImage\camera2.jpg" />
+    <Content Include="Content\ProductImage\camera3.jpg" />
+    <Content Include="Content\ProductImage\phone1.jpg" />
+    <Content Include="Content\ProductImage\phone2.png" />
+    <Content Include="Content\ProductImage\phone3.jpg" />
+    <Content Include="Content\ProductImage\laptop1.png" />
+    <Content Include="Content\ProductImage\Laptop2.png" />
+    <Content Include="Content\ProductImage\laptop3.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Bussiness.Context.tt">
+    <Content Include="Models\BussinessManagement.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Bussiness.Context.cs</LastGenOutput>
-      <DependentUpon>Bussiness.edmx</DependentUpon>
+      <DependentUpon>BussinessManagement.edmx</DependentUpon>
+      <LastGenOutput>BussinessManagement.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Bussiness.tt">
+    <Content Include="Models\BussinessManagement.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Bussiness.edmx</DependentUpon>
-      <LastGenOutput>Bussiness.cs</LastGenOutput>
+      <DependentUpon>BussinessManagement.edmx</DependentUpon>
+      <LastGenOutput>BussinessManagement.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Bussiness.edmx">
+    <EntityDeploy Include="Models\BussinessManagement.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Bussiness.Designer.cs</LastGenOutput>
+      <LastGenOutput>BussinessManagement.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Bussiness.edmx.diagram">
-      <DependentUpon>Bussiness.edmx</DependentUpon>
+    <Content Include="Models\BussinessManagement.edmx.diagram">
+      <DependentUpon>BussinessManagement.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -289,6 +304,8 @@
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\MenuPartial.cshtml" />
+    <Content Include="Views\Product\ProductStyle1Partial.cshtml" />
+    <Content Include="Views\Product\ProductStyle2Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,6 +325,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Humanizer.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -342,6 +370,11 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

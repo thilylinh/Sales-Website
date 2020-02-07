@@ -12,30 +12,30 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ThanhVien
+    public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ThanhVien()
+        public Member()
         {
-            this.BinhLuans = new HashSet<BinhLuan>();
-            this.KhachHangs = new HashSet<KhachHang>();
+            this.Comments = new HashSet<Comment>();
+            this.Customers = new HashSet<Customer>();
         }
     
-        public int MaTV { get; set; }
-        public string TaiKhoan { get; set; }
-        public string MatKhau { get; set; }
-        public string HoTen { get; set; }
-        public string DiaChi { get; set; }
+        public int ID { get; set; }
+        public string Account { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
         public string Email { get; set; }
-        public string SoDienThoai { get; set; }
-        public string CauHoi { get; set; }
-        public string CauTraLoi { get; set; }
-        public Nullable<int> MaLoaiTV { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        public Nullable<int> IDTypeMember { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BinhLuan> BinhLuans { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KhachHang> KhachHangs { get; set; }
-        public virtual LoaiThanhVien LoaiThanhVien { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual MemberType MemberType { get; set; }
     }
 }

@@ -1,23 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BussinessManagement.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using BussinessManagement.Models;
 
 namespace BussinessManagement.Controllers
 {
     public class HomeController : Controller
     {
-        BussinessEntities db = new BussinessEntities();
+        private BussinessEntities db = new BussinessEntities();
+
         // GET: Home
         public ActionResult Index()
         {
+            //select list new mobile to show on home
+            var lstMobile = db.Products.Where(n => n.ProductTypeID == 2 && n.IsDeleted == false && n.IsNew == 1);
+            ViewBag.ListMobile = lstMobile;
+            //select list new laptop to show on home
+            var lstLapTop = db.Products.Where(n => n.ProductTypeID == 1 && n.IsDeleted == false && n.IsNew == 1);
+            ViewBag.ListLaptop = lstLapTop;
+            //select list new camera to show on home
+            var lstCamera = db.Products.Where(n => n.ProductTypeID == 3 && n.IsDeleted == false && n.IsNew == 1);
+            ViewBag.ListCamera = lstCamera;
             return View();
         }
+
         public PartialViewResult MenuPartial()
         {
-            var lstProduct = db.SanPhams;
+            var lstProduct = db.Products;
             return PartialView(lstProduct);
         }
     }

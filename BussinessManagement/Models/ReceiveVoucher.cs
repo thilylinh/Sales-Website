@@ -12,23 +12,21 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class KhachHang
+    public partial class ReceiveVoucher
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KhachHang()
+        public ReceiveVoucher()
         {
-            this.DonDathangs = new HashSet<DonDathang>();
+            this.ReceiveVoucherDetails = new HashSet<ReceiveVoucherDetail>();
         }
     
-        public int MaKH { get; set; }
-        public string TenKH { get; set; }
-        public string DiaChi { get; set; }
-        public string Email { get; set; }
-        public string SoDienThoai { get; set; }
-        public Nullable<int> MaThanhVien { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> ProducerID { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DonDathang> DonDathangs { get; set; }
-        public virtual ThanhVien ThanhVien { get; set; }
+        public virtual ICollection<ReceiveVoucherDetail> ReceiveVoucherDetails { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

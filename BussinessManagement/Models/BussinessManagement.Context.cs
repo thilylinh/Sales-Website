@@ -25,18 +25,18 @@ namespace BussinessManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BinhLuan> BinhLuans { get; set; }
-        public virtual DbSet<ChiTietDonDatHang> ChiTietDonDatHangs { get; set; }
-        public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
-        public virtual DbSet<DonDathang> DonDathangs { get; set; }
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
-        public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
-        public virtual DbSet<LoaiThanhVien> LoaiThanhViens { get; set; }
-        public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
-        public virtual DbSet<NhaSanXuat> NhaSanXuats { get; set; }
-        public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
-        public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<MemberType> MemberTypes { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Producer> Producers { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductType> ProductTypes { get; set; }
+        public virtual DbSet<ReceiveVoucher> ReceiveVouchers { get; set; }
+        public virtual DbSet<ReceiveVoucherDetail> ReceiveVoucherDetails { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<ThanhVien> ThanhViens { get; set; }
+        public virtual DbSet<TheOrderDetail> TheOrderDetails { get; set; }
     }
 }
