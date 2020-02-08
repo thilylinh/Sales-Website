@@ -306,6 +306,10 @@
     <Content Include="Views\Home\MenuPartial.cshtml" />
     <Content Include="Views\Product\ProductStyle1Partial.cshtml" />
     <Content Include="Views\Product\ProductStyle2Partial.cshtml" />
+    <Content Include="Views\Product\ViewDetail.cshtml" />
+    <Content Include="Views\Shared\_ProductLayout.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
+    <Content Include="Views\Product\ViewDetailProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

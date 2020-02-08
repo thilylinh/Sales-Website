@@ -1,0 +1,21 @@
+﻿@using BussinessManagement.Models;
+@model IEnumerable<Product>
+<div class=" rsidebar span_1_of_left">
+    <div class="of-left">
+        <h3 class="cate">Categories</h3>
+    </div>
+    <ul class="menu">
+        @foreach (var GroupNameType in Model.GroupBy(n => n.ProductType))
+        {
+            <li class="item1">
+                <a href="#">@GroupNameType.Key.NameTypeProdcut </a>
+                <ul class="cute">
+                    @foreach (var item in GroupNameType.GroupBy(n => n.Producer))
+                    {
+                        <li class="subitem1"><a href="#">@item.Key.Name </a></li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>
