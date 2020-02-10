@@ -1,0 +1,40 @@
+﻿@using BussinessManagement.Models;
+@model Member
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+
+<div class="account">
+    @Html.ValidationSummary(true,"", new { @class = "text-danger"})
+    <h1>Login</h1>
+    <div class="account-pass">
+        <div class="col-md-8 account-top">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    @Html.LabelFor(m => m.Account)
+                    @Html.TextBoxFor(m => m.Account, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <input value="Login" type="submit" />
+            }
+        </div>
+        <div class="col-md-4 left-account ">
+            <p>You have an account?</p>
+            <br />
+            <a href="@Url.Action("Register","Home")" class="create">Create an account</a>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>window.location.reload</script>
+

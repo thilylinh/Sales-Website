@@ -28,8 +28,6 @@ namespace BussinessManagement.Models
         public string Address { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string Question { get; set; }
-        public string Answer { get; set; }
         public Nullable<int> IDTypeMember { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

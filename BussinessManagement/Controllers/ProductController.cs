@@ -27,7 +27,7 @@ namespace BussinessManagement.Controllers
         }
         public ActionResult ViewDetailProduct(int? productTypeID, int? producerID)
         {
-            if(producerID==null || productTypeID == null)
+            if(producerID == null || productTypeID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

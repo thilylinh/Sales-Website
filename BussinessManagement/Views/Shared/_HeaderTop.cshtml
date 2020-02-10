@@ -1,0 +1,41 @@
+﻿@using BussinessManagement.Models;
+<div class="header-top">
+    <div class="container">
+        <div class="search">
+            <form>
+                <input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                <input type="submit" value="Go">
+            </form>
+        </div>
+        <div class="header-left">
+            <ul>
+                @if (Session["Member"] != null)
+                {
+                    Member member = (Member)Session["Member"];
+                    <li style="color: white;border: 1px solid white;padding: 2px;">Hi @member.Name</li>
+                    <li>@Html.ActionLink("Logout", "Logout","Home")</li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Login","Home")">Login</a></li>
+                    <li><a href="@Url.Action("Register","Home")">Register</a></li>
+                }
+            </ul>
+            <div class="cart box_1">
+                <a href="checkout.html">
+                    <h3>
+                        <div class="total">
+                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+                        </div>
+                        <img src="~/Content/images/cart.png" alt="" />
+                    </h3>
+                </a>
+                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+

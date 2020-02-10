@@ -36,8 +36,6 @@
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
-          <Property Name="Question" Type="nvarchar(max)" />
-          <Property Name="Answer" Type="nvarchar(max)" />
           <Property Name="IDTypeMember" Type="int" />
         </EntityType>
         <EntityType Name="MemberType">
@@ -422,8 +420,6 @@
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IDTypeMember" Type="Int32" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Member" ToRole="Comment" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_KhachHang_ToTable" FromRole="Member" ToRole="Customer" />
@@ -828,8 +824,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="IDTypeMember" ColumnName="IDTypeMember" />
               </MappingFragment>
             </EntityTypeMapping>
