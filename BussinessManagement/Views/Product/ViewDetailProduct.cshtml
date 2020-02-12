@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <p class="tun">@item.Name</p>
-                <a href="#" class="item_add"><p class="number item_price"><i> </i>@item.Price VND</p></a>
+                <a href="@Url.Action("AddCart","Cart",new { @id=item.ID,@url=Request.Url})" class="item_add"><p class="number item_price"><i> </i>@item.Price VND</p></a>
             </div>
         }
 

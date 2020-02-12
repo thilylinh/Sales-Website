@@ -1,0 +1,12 @@
+﻿<div class="cart box_1">
+    <a href="@Url.Action("CartView","Cart")">
+        <h3>
+            <div class="total">
+                <span >@ViewBag.CountMoney VND</span> (<span>@ViewBag.CountProduct</span> items)
+            </div>
+            <img src="~/Content/images/cart.png" alt="" />
+        </h3>
+    </a>
+    <p><a href="@Url.Action("CartView","Cart")" class="simpleCart_empty">Cart</a></p>
+
+</div>
