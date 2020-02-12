@@ -48,7 +48,7 @@
                                         {
                                             if (item.Key != null)
                                             {
-                                                <li><a href="@Url.Action("ViewDetailProduct","Product", new {@productTypeID = groupItem.Key.ID , @producerID= item.Key.ID })">Accessories</a>@item.Key.Name</li>
+                                                <li><a href="@Url.Action("ViewDetailProduct","Product", new {@productTypeID = groupItem.Key.ID , @producerID= item.Key.ID })">@item.Key.Name</a></li>
                                             }
                                         }
                                     </ul>
