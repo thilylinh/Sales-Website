@@ -4,7 +4,7 @@
     Layout = null;
 }
     <div class="col-md-6 men">
-        <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+        <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(3).ID})" class="b-link-stripe b-animate-go  thickbox">
             <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/" + @Model.ElementAt(3).Image)" alt="">
             <div class="b-wrapper">
                 <h3 class="b-animate b-from-top top-in   b-delay03 ">
@@ -12,11 +12,11 @@
                 </h3>
             </div>
         </a>
-        <h3><a href="single.html">@Model.ElementAt(3).Name</a></h3>
+        <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(3).ID})">@Model.ElementAt(3).Name</a></h3>
     </div>
     <div class="col-md-6">
         <div class="col-md1 ">
-            <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+            <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(0).ID})" class="b-link-stripe b-animate-go  thickbox">
                 <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/" + @Model.ElementAt(0).Image)" alt="">
                 <div class="b-wrapper">
                     <h3 class="b-animate b-from-top top-in1   b-delay03 ">
@@ -24,11 +24,11 @@
                     </h3>
                 </div>
             </a>
-            <h3><a href="single.html">@Model.ElementAt(0).Name</a></h3>
+            <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(0).ID})">@Model.ElementAt(0).Name</a></h3>
         </div>
         <div class="col-md2">
             <div class="col-md-6 men1">
-                <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+                <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(1).ID})" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+@Model.ElementAt(1).Image)" alt="">
                     <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
@@ -37,11 +37,11 @@
                     </div>
 
                 </a>
-                <h3><a href="single.html">@Model.ElementAt(1).Name</a></h3>
+                <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(1).ID})">@Model.ElementAt(1).Name</a></h3>
 
             </div>
             <div class="col-md-6 men2">
-                <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+                <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(2).ID})" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+@Model.ElementAt(2).Image)" alt="">
                     <div class="b-wrapper">
                         <h3 class="b-animate b-from-top top-in2   b-delay03 ">
@@ -49,7 +49,7 @@
                         </h3>
                     </div>
                 </a>
-                <h3><a href="single.html">@Model.ElementAt(2).Name</a></h3>
+                <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(2).ID})">@Model.ElementAt(2).Name</a></h3>
             </div>
             <div class="clearfix"> </div>
         </div>

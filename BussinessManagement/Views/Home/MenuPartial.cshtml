@@ -20,7 +20,7 @@
                                         {
                                             if (item.Key != null)
                                             {
-                                                <li><a href="products.html">@item.Key.Name</a></li>
+                                                <li><a href="@Url.Action("ViewDetailProduct","Product", new {@productTypeID = groupItem.Key.ID , @producerID= item.Key.ID })">@item.Key.Name</a></li>
                                             }
                                         }
                                     </ul>
@@ -48,7 +48,7 @@
                                         {
                                             if (item.Key != null)
                                             {
-                                                <li><a href="products.html"></a>@item.Key.Name</li>
+                                                <li><a href="@Url.Action("ViewDetailProduct","Product", new {@productTypeID = groupItem.Key.ID , @producerID= item.Key.ID })">@item.Key.Name</a></li>
                                             }
                                         }
                                     </ul>

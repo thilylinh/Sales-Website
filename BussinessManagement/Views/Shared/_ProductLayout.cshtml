@@ -20,7 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- start menu -->
     <link href="~/Content/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="~/Content/js/memenu.js"></script>
-    <script>$(document).ready(function () { $(".memenu").memenu(); });</script>
+    <script>$(document).ready(function(){$(".memenu").memenu();});</script>
     <script src="~/Content/js/simpleCart.min.js"></script>
 </head>
 <body>
@@ -36,14 +36,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"> </div>
             </div>
         </div>
-    </div>
 
-    <div class="banner">
-        <img src="~/Content/images/banner.jpg" />
     </div>
 
     <!--content-->
-    @RenderBody()
+    <div class="product">
+        <div class="container">
+            <div class="col-md-3 product-price">
+
+                @Html.Action("Category", "Product")
+                <!--initiate accordion-->
+                <script type="text/javascript">
+                    $(function () {
+                        var menu_ul = $('.menu > li > ul'),
+                            menu_a = $('.menu > li > a');
+                        menu_ul.hide();
+                        menu_a.click(function (e) {
+                            e.preventDefault();
+                            if (!$(this).hasClass('active')) {
+                                menu_a.removeClass('active');
+                                menu_ul.filter(':visible').slideUp('normal');
+                                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                            } else {
+                                $(this).removeClass('active');
+                                $(this).next().stop(true, true).slideUp('normal');
+                            }
+                        });
+
+                    });
+                </script>
+
+
+            </div>
+            @RenderBody()
+            
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    
     <div class="footer">
         @Html.Partial("_Footer")
     </div>

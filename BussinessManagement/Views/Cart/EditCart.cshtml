@@ -1,0 +1,98 @@
+﻿@using BussinessManagement.Models.ViewModel;
+@model ItemCart
+@{
+    ViewBag.Title = "FixCart";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+@{
+    List<ItemCart> lstItemCart = ViewBag.Cart as List<ItemCart>;
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("ID")
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Image")
+        </th>
+        <th>
+
+            @Html.DisplayName("Price")
+        </th>
+        <th>
+            @Html.DisplayName("Amount")
+        </th>
+        <th>
+            @Html.DisplayName("Total Money")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in lstItemCart)
+    {
+        if (Model.ID == item.ID)
+        {
+            using (Html.BeginForm("UpdateCart", "Cart"))
+            {
+                @Html.AntiForgeryToken()
+                <tr>
+                    <td>
+                        @item.ID
+                        @Html.Hidden("ID", item.ID)
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        <img src="@Url.Content("~/Content/ProductImage/"+item.Image)" style="height:50px;width:50px;" />
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @Html.TextBox("Amount", item.Amount, new { @class = "ChangeAmount" })
+                        <br />
+                        <span id="showNotifi" class="text-danger"></span>
+                    </td>
+                    <td>
+                        @item.TotalMoney VND
+                    </td>
+                    <td>
+                        <input type="submit" value="Update" class="btn-primary" id="btnUpdate" />
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    <img src="@Url.Content("~/Content/ProductImage/"+item.Image)" style="height:50px;width:50px;" />
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control input-number", @min = "1", @max = "999999999", @name = "quant[2]" });
+                </td>
+                <td>
+                    @item.TotalMoney.ToString("#,##") VND
+                </td>
+                <td>
+                    <input type="submit" value="Update" />
+                </td>
+            </tr>
+        }
+    }
+</table>
+<script type="text/javascript" src="~/Content/js/UpdateTextboxUpdate.js"></script>

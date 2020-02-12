@@ -3,7 +3,7 @@
 @foreach (var item in Model.Take(3))
 {
     <div class="col-md-4 grid-top">
-        <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+        <a href="@Url.Action("ViewDetail","Product",new {id = item.ID})" class="b-link-stripe b-animate-go  thickbox">
             <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+item.Image)" alt="this is place image">
             <div class="b-wrapper">
                 <h3 class="b-animate b-from-left    b-delay03 ">
@@ -12,6 +12,6 @@
             </div>
         </a>
 
-        <p><a href="single.html">@item.Name</a></p>
+        <p><a href="@Url.Action("ViewDetail","Product",new {id = item.ID})">@item.Name</a></p>
     </div>
 }
