@@ -62,4 +62,11 @@ else
             </tr>
         }
     </table>
+    <div class="text-center">
+        @using (Html.BeginForm("Order", "Cart"))
+        {
+        <input type="submit" value="order" class="btn-success" />
+        }
+    </div>
+   
 }
