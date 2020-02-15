@@ -55,7 +55,7 @@ namespace BussinessManagement.Controllers
             {
                 if (product.Amount < productCheck.Amount)
                 {
-                    return View("Notification");
+                    return Content("<script>alert(\"Products are sold out!\")</script>");
                 }
                 productCheck.Amount++;
                 productCheck.TotalMoney = productCheck.Amount * productCheck.Price;
@@ -65,7 +65,7 @@ namespace BussinessManagement.Controllers
             ItemCart itemCart = new ItemCart(id);
             if (product.Amount < itemCart.Amount)
             {
-                return View("Notification");
+                return Content("<script>alert(\"Products are sold out!\")</script>");
             }
             lstCarts.Add(itemCart);
             return Redirect(url);
@@ -133,12 +133,13 @@ namespace BussinessManagement.Controllers
 
             ItemCart itemUpdate = lstItem.Find(n => n.ID == item.ID);
             itemUpdate.Amount = item.Amount;
-             itemUpdate.TotalMoney = itemUpdate.Amount * itemUpdate.Price;
+            itemUpdate.TotalMoney = itemUpdate.Amount * itemUpdate.Price;
             return RedirectToAction("CartView");
         }
+
         public ActionResult DeleteCart(int id)
         {
-            if(Session["Cart"] == null)
+            if (Session["Cart"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }

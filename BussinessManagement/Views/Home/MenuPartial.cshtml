@@ -10,7 +10,7 @@
             if (groupItem.Key != null)
             {
                 <li>
-                    <a class="color1" href="#">@groupItem.Key.NameTypeProdcut</a>
+                    <a class="color1" href="@Url.Action("ViewAllProduct","Product",new { @typeProductID=groupItem.Key.ID})">@groupItem.Key.NameTypeProdcut</a>
                     <div class="mepanel">
                         <div class="row">
                             <div class="col1">

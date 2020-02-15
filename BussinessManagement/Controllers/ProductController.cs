@@ -1,16 +1,15 @@
-﻿using System;
+﻿using BussinessManagement.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BussinessManagement.Models;
 
 namespace BussinessManagement.Controllers
 {
     public class ProductController : Controller
     {
-        BussinessEntities db = new BussinessEntities();
+        private BussinessEntities db = new BussinessEntities();
+
         // GET: Product
         public ActionResult ViewDetail(int? id)
         {
@@ -25,9 +24,10 @@ namespace BussinessManagement.Controllers
             }
             return View(product);
         }
+
         public ActionResult ViewDetailProduct(int? productTypeID, int? producerID)
         {
-            if(producerID == null || productTypeID == null)
+            if (producerID == null || productTypeID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -38,20 +38,38 @@ namespace BussinessManagement.Controllers
             }
             return View(lstProduct);
         }
+
         [ChildActionOnly]
         public PartialViewResult ProductStyle1Partial()
-        { 
+        {
             return PartialView();
         }
+
         [ChildActionOnly]
         public PartialViewResult ProductStyle2Partial()
         {
             return PartialView();
         }
+
         public PartialViewResult Category()
         {
             var listProduct = db.Products;
             return PartialView(listProduct);
+        }
+
+        public ActionResult ViewAllProduct(int? typeProductID)
+        {
+            if (typeProductID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<Product> lstProduct = db.Products.Where(n => n.ProductTypeID == typeProductID).ToList();
+
+            if (lstProduct.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+            return View(lstProduct);
         }
     }
 }

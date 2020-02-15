@@ -5,68 +5,53 @@
     Layout = "~/Views/Shared/_ProductLayout.cshtml";
 }
 
-    <div class="col-md-9 product-price1">
-        <div class="col-md-5 single-top">
-            <div class="flexslider">
-                <ul class="slides">
-                    <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
-                        <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
-                    </li>
-                    <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
-                        <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
-                    </li>
-                    <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
-                        <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
-                    </li>
-                    <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
-                        <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
-                    </li>
-                </ul>
-            </div>
-            <!-- FlexSlider -->
-            <script defer src="~/Content/js/jquery.flexslider.js"></script>
-            <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" />
+<div class="col-md-9 product-price1">
+    <div class="col-md-5 single-top">
+        <div class="flexslider">
+            <ul class="slides">
+                <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
+                    <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
+                </li>
+                <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
+                    <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
+                </li>
+                <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
+                    <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
+                </li>
+                <li data-thumb="@Url.Content("~/Content/ProductImage/"+Model.Image)">
+                    <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
+                </li>
+            </ul>
+        </div>
+        <!-- FlexSlider -->
+        <script defer src="~/Content/js/jquery.flexslider.js"></script>
+        <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" />
 
-            <script>
-                // Can also be used with $(document).ready()
-                $(window).load(function () {
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        controlNav: "thumbnails"
-                    });
+        <script>
+            // Can also be used with $(document).ready()
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
                 });
-            </script>
-        </div>
-        <div class="col-md-7 single-top-in simpleCart_shelfItem">
-            <div class="single-para ">
-                <h4>@Model.Name</h4>
-                <div class="star-on">
-                    <ul class="star-footer">
-                        <li><a href="#"><i> </i></a></li>
-                        <li><a href="#"><i> </i></a></li>
-                        <li><a href="#"><i> </i></a></li>
-                        <li><a href="#"><i> </i></a></li>
-                        <li><a href="#"><i> </i></a></li>
-                    </ul>
-                    <div class="review">
-                        <a href="#"> 1 customer review </a>
-
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-
-                <h5 class="item_price">@Model.Price VND</h5>
-                <p>
-                    @Model.Config
-                </p>
-                <a href="#" class="add-cart item_add">ADD TO CART</a>
-            </div>
-        </div>
-        <div class="clearfix"> </div>
-        <!---->
+            });
+        </script>
         <div>
             <h3>Description</h3>
             <p>@Model.Description</p>
         </div>
     </div>
+    <div class="col-md-7 single-top-in simpleCart_shelfItem">
+        <div class="single-para ">
+            <h4>@Model.Name</h4>
+            <div class="clearfix"> </div>
+        </div>
 
+        <h5 class="item_price">@Model.Price VND</h5>
+        <p>
+            @Model.Config
+        </p>
+        <a href="@Url.Action("AddCart","Cart",new {@id=Model.ID,@url=Request.Url })" class="add-cart item_add">ADD TO CART</a>
+    </div>
+</div>
+<div class="clearfix"> </div>
