@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using PagedList;
 
 namespace BussinessManagement.Controllers
 {
@@ -25,7 +26,7 @@ namespace BussinessManagement.Controllers
             return View(product);
         }
 
-        public ActionResult ViewDetailProduct(int? productTypeID, int? producerID)
+        public ActionResult ViewDetailProduct(int? productTypeID, int? producerID, int? page)
         {
             if (producerID == null || productTypeID == null)
             {
@@ -36,7 +37,12 @@ namespace BussinessManagement.Controllers
             {
                 return HttpNotFound();
             }
-            return View(lstProduct);
+            //paging 
+            int pageSize = 9;
+            int pageCurrent = (page ?? 1);
+            ViewBag.ProductTypeID = productTypeID;
+            ViewBag.ProducerID = producerID;
+            return View(lstProduct.OrderBy(n=>n.Price).ToPagedList(pageCurrent,pageSize));
         }
 
         [ChildActionOnly]
@@ -57,7 +63,7 @@ namespace BussinessManagement.Controllers
             return PartialView(listProduct);
         }
 
-        public ActionResult ViewAllProduct(int? typeProductID)
+        public ActionResult ViewAllProduct(int? typeProductID,int? page)
         {
             if (typeProductID == null)
             {
@@ -69,7 +75,12 @@ namespace BussinessManagement.Controllers
             {
                 return HttpNotFound();
             }
-            return View(lstProduct);
+
+            //paging 
+            int pageSize = 9;
+            int pageCurrent = (page ?? 1);
+            ViewBag.ProductTypeID = typeProductID;
+            return View(lstProduct.OrderBy(n=>n.Price).ToPagedList(pageCurrent,pageSize));
         }
     }
 }

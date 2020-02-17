@@ -1,15 +1,16 @@
 ﻿@using BussinessManagement.Models;
 @using PagedList.Mvc;
-
 @model PagedList.IPagedList<Product>
+@*@model IEnumerable<Product>*@
+
 @{
-    ViewBag.Title = "ViewAllProduct";
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_ProductLayout.cshtml";
 }
 
     <div class="col-md-9 product1">
         <div class=" bottom-product">
-            @foreach (var item in Model.OrderBy(n => n.Name))
+            @foreach (var item in Model.OrderBy(n => n.Price))
             {
                 <div class="col-md-4 bottom-cd simpleCart_shelfItem">
                     <div class="product-at ">
@@ -29,6 +30,9 @@
         </div>
         <div>
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("ViewAllProduct", new { page = page, @productTypeID = ViewBag.ProductTypeID}))
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { page = page, @searchString = ViewBag.Values }))
         </div>
     </div>
+
+
+
