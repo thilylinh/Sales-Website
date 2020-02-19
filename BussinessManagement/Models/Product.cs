@@ -34,11 +34,14 @@ namespace BussinessManagement.Models
         public Nullable<int> VoteNumber { get; set; }
         public Nullable<int> CommentNumber { get; set; }
         public Nullable<int> BuyNumber { get; set; }
-        public Nullable<int> IsNew { get; set; }
+        public Nullable<bool> IsNew { get; set; }
         public Nullable<int> SupplierID { get; set; }
         public Nullable<int> ProducerID { get; set; }
         public Nullable<int> ProductTypeID { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public string Image1 { get; set; }
+        public string Image2 { get; set; }
+        public string image3 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

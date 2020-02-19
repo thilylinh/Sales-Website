@@ -133,6 +133,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\ProductManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +197,47 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin\css\animate.css" />
+    <Content Include="Content\admin\css\bootstrap.css" />
+    <Content Include="Content\admin\css\clndr.css" />
+    <Content Include="Content\admin\css\custom.css" />
+    <Content Include="Content\admin\css\font-awesome.css" />
+    <Content Include="Content\admin\css\jqvmap.css" />
+    <Content Include="Content\admin\css\style-grid.css" />
+    <Content Include="Content\admin\css\style.css" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\admin\images\1.png" />
+    <Content Include="Content\admin\images\2.png" />
+    <Content Include="Content\admin\images\3.png" />
+    <Content Include="Content\admin\images\a.png" />
+    <Content Include="Content\admin\images\i1.png" />
+    <Content Include="Content\admin\images\i2.png" />
+    <Content Include="Content\admin\images\i3.png" />
+    <Content Include="Content\admin\images\i4.png" />
+    <Content Include="Content\admin\images\img1.png" />
+    <Content Include="Content\admin\images\lock.png" />
+    <Content Include="Content\admin\images\tick.png" />
+    <Content Include="Content\admin\images\user.png" />
+    <Content Include="Content\admin\js\bootstrap.js" />
+    <Content Include="Content\admin\js\Chart.js" />
+    <Content Include="Content\admin\js\classie.js" />
+    <Content Include="Content\admin\js\clndr.js" />
+    <Content Include="Content\admin\js\custom.js" />
+    <Content Include="Content\admin\js\jquery-1.11.1.min.js" />
+    <Content Include="Content\admin\js\jquery.circlechart.js" />
+    <Content Include="Content\admin\js\jquery.nicescroll.js" />
+    <Content Include="Content\admin\js\jquery.vmap.js" />
+    <Content Include="Content\admin\js\jquery.vmap.sampledata.js" />
+    <Content Include="Content\admin\js\jquery.vmap.world.js" />
+    <Content Include="Content\admin\js\metisMenu.min.js" />
+    <Content Include="Content\admin\js\modernizr.custom.js" />
+    <Content Include="Content\admin\js\moment-2.2.1.js" />
+    <Content Include="Content\admin\js\scripts.js" />
+    <Content Include="Content\admin\js\site.js" />
+    <Content Include="Content\admin\js\skycons.js" />
+    <Content Include="Content\admin\js\underscore-min.js" />
+    <Content Include="Content\admin\js\validator.min.js" />
+    <Content Include="Content\admin\js\wow.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -275,6 +318,12 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\admin\fonts\FontAwesome.otf" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff2" />
     <EntityDeploy Include="Models\BussinessManagement.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BussinessManagement.Designer.cs</LastGenOutput>
@@ -306,6 +355,10 @@
     <Content Include="Views\Home\MenuPartial.cshtml" />
     <Content Include="Views\Product\ProductStyle1Partial.cshtml" />
     <Content Include="Views\Product\ProductStyle2Partial.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\ProductManagement\Index.cshtml" />
+    <Content Include="Views\ProductManagement\AddProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

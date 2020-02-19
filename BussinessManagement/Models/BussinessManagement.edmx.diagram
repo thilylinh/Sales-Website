@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8b1b01fc8283426195e70b2f6b53eaa5" Name="Diagram1">
-        <EntityTypeShape EntityType="BussinessModel.Comment" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.Customer" Width="1.5" PointX="3.75" PointY="18.25" IsExpanded="true" />
+      <Diagram DiagramId="760f84287a6d48148e09689f1062c44d" Name="Diagram1">
+        <EntityTypeShape EntityType="BussinessModel.Comment" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.Customer" Width="1.5" PointX="3.75" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="BussinessModel.Member" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.MemberType" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.Order" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.Producer" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.Product" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.ProductType" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.ReceiveVoucher" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.ReceiveVoucherDetail" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.Supplier" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.sysdiagram" Width="1.5" PointX="5.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BussinessModel.TheOrderDetail" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.MemberType" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.Order" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.Producer" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.Product" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.ProductType" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.ReceiveVoucher" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.ReceiveVoucherDetail" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.Supplier" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BussinessModel.TheOrderDetail" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
         <AssociationConnector Association="BussinessModel.FK_BinhLuan_SanPham" ManuallyRouted="false" />
         <AssociationConnector Association="BussinessModel.FK_BinhLuan_ThanhVien" ManuallyRouted="false" />
         <AssociationConnector Association="BussinessModel.FK_DonDathang_KhachHang" ManuallyRouted="false" />

@@ -36,8 +36,6 @@
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
-          <Property Name="Question" Type="nvarchar(max)" />
-          <Property Name="Answer" Type="nvarchar(max)" />
           <Property Name="IDTypeMember" Type="int" />
         </EntityType>
         <EntityType Name="MemberType">
@@ -85,11 +83,14 @@
           <Property Name="VoteNumber" Type="int" />
           <Property Name="CommentNumber" Type="int" />
           <Property Name="BuyNumber" Type="int" />
-          <Property Name="IsNew" Type="int" />
+          <Property Name="IsNew" Type="bit" />
           <Property Name="SupplierID" Type="int" />
           <Property Name="ProducerID" Type="int" />
           <Property Name="ProductTypeID" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Image1" Type="nvarchar(max)" />
+          <Property Name="Image2" Type="nvarchar(max)" />
+          <Property Name="image3" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -422,8 +423,6 @@
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IDTypeMember" Type="Int32" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Member" ToRole="Comment" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_KhachHang_ToTable" FromRole="Member" ToRole="Customer" />
@@ -478,11 +477,14 @@
           <Property Name="VoteNumber" Type="Int32" />
           <Property Name="CommentNumber" Type="Int32" />
           <Property Name="BuyNumber" Type="Int32" />
-          <Property Name="IsNew" Type="Int32" />
+          <Property Name="IsNew" Type="Boolean" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="ProducerID" Type="Int32" />
           <Property Name="ProductTypeID" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Product" ToRole="Comment" />
           <NavigationProperty Name="Producer" Relationship="Self.FK_SanPham_NhaSanXuat" FromRole="Product" ToRole="Producer" />
           <NavigationProperty Name="TheOrderDetails" Relationship="Self.FK_ChiTietDonDatHang_SanPham" FromRole="Product" ToRole="TheOrderDetail" />
@@ -828,8 +830,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="IDTypeMember" ColumnName="IDTypeMember" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -886,6 +886,9 @@
                 <ScalarProperty Name="ProducerID" ColumnName="ProducerID" />
                 <ScalarProperty Name="ProductTypeID" ColumnName="ProductTypeID" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Image1" ColumnName="Image1" />
+                <ScalarProperty Name="Image2" ColumnName="Image2" />
+                <ScalarProperty Name="image3" ColumnName="image3" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
