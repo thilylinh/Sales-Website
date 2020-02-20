@@ -35,7 +35,7 @@ namespace BussinessManagement.Controllers.Admin
             ViewBag.ProductTyle = new SelectList(db.ProductTypes.OrderBy(n => n.NameTypeProdcut), "ID", "NameTypeProdcut");
             ViewBag.Producer = new SelectList(db.Producers.OrderBy(n => n.Name), "ID", "Name");
             int error = 0;
-            for (int i = 0; i < image.Length; i++)
+            for (int i = 0; i < image.Count(); i++)
             {
                 if (image[i].ContentLength > 0)
                 {
@@ -70,6 +70,55 @@ namespace BussinessManagement.Controllers.Admin
             product.Image2 = image[2].FileName;
             product.image3 = image[3].FileName;
             db.Products.Add(product);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            
+            if (id == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            var product = db.Products.SingleOrDefault(n => n.ID == id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            } 
+            ViewBag.Supplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "ID", "Name",product.SupplierID);
+            ViewBag.ProductTyle = new SelectList(db.ProductTypes.OrderBy(n => n.NameTypeProdcut), "ID", "NameTypeProdcut",product.ProductTypeID);
+            ViewBag.Producer = new SelectList(db.Producers.OrderBy(n => n.Name), "ID", "Name",product.ProducerID);
+
+
+            return View(product);
+        }
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            var product = db.Products.SingleOrDefault(n => n.ID == id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
