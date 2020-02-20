@@ -19,6 +19,7 @@ namespace BussinessManagement.Controllers.Admin
 
         [HttpGet]
         public ActionResult AddProduct()
+
         {
             ViewBag.Supplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "ID", "Name");
             ViewBag.ProductTyle = new SelectList(db.ProductTypes.OrderBy(n => n.NameTypeProdcut), "ID", "NameTypeProdcut");
@@ -30,6 +31,9 @@ namespace BussinessManagement.Controllers.Admin
         [HttpPost]
         public ActionResult AddProduct(Product product, HttpPostedFileBase[] image)
         {
+            ViewBag.Supplier = new SelectList(db.Suppliers.OrderBy(n => n.Name), "ID", "Name");
+            ViewBag.ProductTyle = new SelectList(db.ProductTypes.OrderBy(n => n.NameTypeProdcut), "ID", "NameTypeProdcut");
+            ViewBag.Producer = new SelectList(db.Producers.OrderBy(n => n.Name), "ID", "Name");
             int error = 0;
             for (int i = 0; i < image.Length; i++)
             {
@@ -43,12 +47,16 @@ namespace BussinessManagement.Controllers.Admin
                     else
                     {
                         var fileName = Path.GetFileName(image[i].FileName);
-                        var path = Path.Combine(Server.MapPath("~/Content/ProductImage/"), fileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/ProductImage"), fileName);
                         if (System.IO.File.Exists(path))
                         {
                             ViewBag.Error = "image is already exist";
                             error++;
                             return View();
+                        }
+                        else
+                        {
+                            image[i].SaveAs(path);
                         }
                     }
                 }

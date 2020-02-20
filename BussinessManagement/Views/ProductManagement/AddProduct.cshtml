@@ -109,7 +109,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SupplierID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ID", (IEnumerable<SelectListItem>)ViewBag.Supplier, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("SupplierID",(IEnumerable<SelectListItem>)ViewBag.Supplier, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,7 +117,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProducerID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ID", (IEnumerable<SelectListItem>)ViewBag.Producer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("ProducerID", (IEnumerable<SelectListItem>)ViewBag.Producer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProducerID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -125,7 +125,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ID", (IEnumerable<SelectListItem>)ViewBag.ProductTyle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("ProductTypeID", (IEnumerable<SelectListItem>)ViewBag.ProductTyle, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProductTypeID, "", new { @class = "text-danger" })
             </div>
         </div>
