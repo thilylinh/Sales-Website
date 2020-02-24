@@ -134,7 +134,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\OrderManagementController.cs" />
     <Compile Include="Controllers\Admin\ProductManagementController.cs" />
+    <Compile Include="Controllers\Admin\ReceiveVoucherController.cs" />
+    <Compile Include="Controllers\Admin\StatisticsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,6 +186,12 @@
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReceiveVoucherDetail.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
@@ -361,6 +370,15 @@
     <Content Include="Views\ProductManagement\AddProduct.cshtml" />
     <Content Include="Views\ProductManagement\Edit.cshtml" />
     <Content Include="Views\ProductManagement\Delete.cshtml" />
+    <Content Include="Views\ReceiveVoucher\ImportGoods.cshtml" />
+    <Content Include="Views\ReceiveVoucher\ProductOutOfStock.cshtml" />
+    <Content Include="Views\ReceiveVoucher\ImportProductSingle.cshtml" />
+    <Content Include="Views\OrderManagement\NewOrder.cshtml" />
+    <Content Include="Views\OrderManagement\OrderDelivery.cshtml" />
+    <Content Include="Views\OrderManagement\OrderDone.cshtml" />
+    <Content Include="Views\OrderManagement\Approve.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Shared\NavigationMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

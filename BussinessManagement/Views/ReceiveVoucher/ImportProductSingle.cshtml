@@ -1,0 +1,56 @@
+﻿@using BussinessManagement.Models;
+@model Product
+@{
+    ViewBag.Title = "ImportProductSingle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<legend>Import for product:  <b style="color: rgb(192,0,0)">@Model.Name</b> </legend>
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            <img src="@Url.Content("~/Content/ProductImage/"+Model.Image)" />
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="ttSP">
+            <h3>Producer: @Model.Producer.Name</h3>
+            <h3>Product type: @Model.ProductType.NameTypeProdcut</h3>
+            <h3>Quantity: @Model.Amount</h3>
+        </div>
+    </div>
+</div>
+<br />
+<fieldset>
+    <legend>Thông tin nhập hàng</legend>
+</fieldset>
+@using (Html.BeginForm("ImportProductSingle", "ReceiveVoucher"))
+{
+    @Html.Hidden("ID", Model.ID)
+    <div class="row">
+        <div class="col-md-4">
+            @{var lstProducer = (SelectList)ViewBag.ProductID;}
+            Producer: @Html.DropDownList("Name", lstProducer)
+        </div>
+        <div class="col-md-4">
+            Quantity : @Html.TextBox("Amount")
+        </div>
+        <div class="col-md-4">
+            Price :@Html.TextBox("Price")
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <div class="clear right" style="text-align:right;">
+        <br />
+        <input type="submit" class="btn btn-primary" value="Import" />
+    </div>
+}
+
+
+

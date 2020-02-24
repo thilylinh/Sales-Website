@@ -1,0 +1,85 @@
+﻿@using BussinessManagement.Models;
+@model Order
+@{
+    ViewBag.Title = "Approve";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Approve</h2>
+<hr />
+
+<h2>Order Information <font color="#f65e84">@Model.Customer.Name</font></h2>
+<br />
+<br />
+
+@using (Html.BeginForm())
+{
+    <div class="table">
+        @{IEnumerable<TheOrderDetail> lstOrderDetail = (IEnumerable<TheOrderDetail>)ViewBag.ListOrderDetail ;}
+        <table class="table" id="table">
+            @*Phần thông tin đơn hàng*@
+            <tr>
+                <td colspan="4">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>Id order: <b style="color:red;"> @Model.IDOrder @Html.Hidden("IDOrder", @Model.IDOrder)</b></td>
+                            <td>Id customer: <b style="color:red;"> @Model.Customer.ID</b></td>
+                            <td>Name: <b style="color:red;"> @Model.Customer.Name</b></td>
+                            <td>Order date: @Model.OrderDate.Value.ToString("dd/MM/yyyy")</td>
+                            <td>Delivery date:@Html.TextBoxFor(model=>model.DeliveryDate, new{ type="date"})</td>
+                            <td>Payed: @Html.EditorFor(model => model.IsPayed)</td>
+                            <td>Deliveried: @Html.EditorFor(model => model.Status)</td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td><b>Product</b></td>
+                <td><b>Image</b></td>
+                <td><b>Quantity</b></td>
+                <td><b>Price</b></td>
+            </tr>
+
+            @foreach (var item in lstOrderDetail)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td><img width="150" height="50" src="@Url.Content("~/Content/ProductImage/"+item.Product.Image)" /></td>
+                    <td>@item.Amount</td>
+                    <td>@item.Price</td>
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="4">Total Quantity: @Model.TheOrderDetails.Sum(n => n.Amount) product</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="4">Total Money: @Model.TheOrderDetails.Sum(n => n.Product.Price).Value.ToString("#,##") VND</td>
+            </tr>
+        </table>
+        <br /><br />
+        <input type="button" value="Print" id="btnPrint" />
+        <input type="submit" value="Save" id="btnSave" />
+    </div>
+}
+
+<script>
+
+    $("#btnPrint").click(function () {
+        var content = "<table>" + $("#table").html() + "</table>";
+        Print(content);
+    });
+
+    function Print(content)
+    {
+        var printWindow = window.open('', '', 'height=400,width=800');
+        printWindow.document.write('<html><head><title>DIV Contents</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(content);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+</script>
+

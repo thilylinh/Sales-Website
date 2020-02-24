@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BussinessManagement.Models.Order>
+@{
+    ViewBag.Title = "OrderDone";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+
+<h2>Order management</h2>
+<br />
+<hr />
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="@Url.Action("OrderDelivery","OrderManagement")">Pay not yet</a></li>
+    <li role="presentation"><a href="@Url.Action("NewOrder", "OrderManagement")">Delivery not yet and payed </a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("OrderDone", "OrderManagement")">Done</a></li>
+</ul>
+<br />
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+    grid.Column("IDOrder", header: "ID"),
+            grid.Column("ID", header: "Name", format:p=>p.Customer.Name),
+        grid.Column("OrderDate", header: "Order Date"),
+        grid.Column("Status", header: "Status"),
+        grid.Column("DeliveryDate", header: "Delivery date"),
+        grid.Column("isPayed", header: "Payed"),
+        grid.Column("Preferential", header: "Preferential"),
+        grid.Column("isCancel", header: "Cancel"),
+    grid.Column(format: p => @Html.ActionLink("Approve", "Approve", new { id = p.IDOrder }, new { @target = "_blank", @class = "btn-success" }))
+
+        ))
+
+<link href="~/Content/admin/css/style-grid.css" rel="stylesheet" />
+
+

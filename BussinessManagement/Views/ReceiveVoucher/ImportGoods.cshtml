@@ -1,0 +1,182 @@
+﻿@using BussinessManagement.Models;
+@model  ReceiveVoucher
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    IEnumerable<Supplier> lstSupplier = ViewBag.SupplierID as IEnumerable<Supplier>;
+}
+
+@using (@Html.BeginForm())
+{
+    <div class="row">
+        <div class="receive-voucher col-md-12">
+            <div class="col-md-2">
+                Supplier:
+            </div>
+            <div class="col-md-5">
+                @*choose supplier*@
+                <select class="ProducerID" name="ProducerID">
+
+                    @foreach (var item in lstSupplier)
+                    {
+                        <option value="@item.ID">@item.Name</option>
+                    }
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+
+    <div class="col-md-12">
+        <div class="col-md-2">
+            Update Date:
+        </div>
+        <div class="col-md-5">
+            <input name="UpdateDate" type="date" />
+        </div>
+    </div>
+    <div class="clearfix">  </div>
+    <br />
+    <br />
+    <br />
+    @*Receiver voucer detail*@
+    <table class="table tblImportReceiveVoucherDetail">
+        @{IEnumerable<Product> lstProduct = ViewBag.ListProduct as IEnumerable<Product>;}
+        @*create tr receive products*@
+        <tr class="trAppend" style="display:none;">
+            <td>
+                <select class="ddlProduct" name="">
+                    @foreach (var item in lstProduct)
+                    {
+                        <option value="@item.ID"> @item.Name </option>
+                    }
+                </select>
+            </td>
+            <td>
+                <input name="" class="txtPrice" value="0" />
+            </td>
+            <td>
+                <input name="" class="txtQuantity" value="0" />
+            </td>
+            <td>
+                <input class="btnDelete btn btn-danger" style="width:30px;height:30px" value="-" />
+            </td>
+        </tr>
+        <tr class="trFirstChild" data-id="-1">
+            <td>Product</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td></td>
+        </tr>
+
+    </table>
+    @*button add*@
+    <input type="button" value="+" class="btn btn-success" id="btnAdd" />
+    //button submit
+    <input type="submit" value="Import" class="btn btn-primary" id="btnImport" />
+}
+
+<script>
+
+    $("#btnAdd").click(function () {   
+        //add i +1
+        var id_end = $(".tblImportReceiveVoucherDetail").find("tr:last-child").attr("data-id");
+        i = parseInt(id_end) + 1;
+        //find
+        var tdcontent = $(".trAppend").html();
+        
+        var trcontent = "<tr class=\"trAppended\" data-id=\"" +i+ "\">" + tdcontent + "</tr>";
+        
+        $(".tblImportReceiveVoucherDetail").append(trcontent);
+        
+        
+        loadID();
+
+    });
+
+    
+    function loadID() {
+        $(".trAppended").each(function () {
+            
+            var id = $(this).attr("data-id");
+            var nameProductID = "[" + id + "].ProductID"; 
+            var nameQuantity = "[" + id + "].Amount"; 
+            var namePrice = "[" + id + "].Price";  
+            $(this).find(".ddlProduct").attr("name", nameProductID);
+            $(this).find(".txtPrice").attr("name", namePrice);
+            $(this).find(".txtQuantity").attr("name", nameQuantity);
+
+        })
+    };
+
+    function UpdateID()
+    {   //Lấy lại tr 1
+        var id_end = $(".tblImportReceiveVoucherDetail").find(".trFirstChild").attr("data-id");
+        i = parseInt(id_end) + 1;
+        $(".trAppended").each(function () {
+            var id = i;
+            $(this).attr("data-id", i);
+
+            var nameProductID = "[" + id + "].ProductID"; 
+            var nameQuantity = "[" + id + "].Amount";
+            var namePrice = "[" + id + "].Price";   
+            $(this).find(".ddlProduct").attr("name", nameProductID);
+            $(this).find(".txtPrice").attr("name", namePrice);
+            $(this).find(".txtQuantity").attr("name", nameQuantity);
+            i++;
+        })
+    }
+    //event delete
+    $("body").delegate(".btnDelete", "click", function () {
+    
+        $(this).closest("tr").remove();
+        UpdateID();
+
+    });
+    //event import
+    $("#btnImport").click(function () {
+
+        if (CheckPrice() == false)
+        {
+            return false;
+        }
+        if (CheckQuantity() == false)
+        {
+            return false;
+        }
+
+    });
+
+    function CheckPrice() {
+        var bl = true;
+ 
+        $(".txtPrice").each(function () {
+            var value = $(this).val();
+            if (isNaN(value) == true && value < 0) {
+                alert("Price is not valid!");
+                bl = false;
+                return bl;
+            }
+        });
+        return bl;
+    }
+    function CheckQuantity() {
+        var bl = true;
+        $(".txtQuantity").each(function () {
+            var value = $(this).val();
+            if (isNaN(value) == true && value < 0) {
+                alert("Quantity is not valid!");
+                bl = false;
+                return bl;
+            }
+        });
+        return bl;
+    }
+
+</script>
