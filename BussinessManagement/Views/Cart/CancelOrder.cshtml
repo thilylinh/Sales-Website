@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BussinessManagement.Models.TheOrderDetail>
+
+@{
+    ViewBag.Title = "CancelOrder";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+}
+@Html.AntiForgeryToken();
+<h2 class="text-info text-center">Order Success</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayName("Total");
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(n => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(n => item.Amount)
+    </td>
+    <td>
+        @Html.DisplayFor(n => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(n => item.Price * item.Amount);
+    </td>
+</tr>
+}
+
+</table>
+@Html.ActionLink("Cancel", "Cancel")

@@ -57,6 +57,7 @@
           <Property Name="IsPayed" Type="bit" />
           <Property Name="CustomerID" Type="int" />
           <Property Name="Preferential" Type="int" />
+          <Property Name="isCancel" Type="bit" />
         </EntityType>
         <EntityType Name="Producer">
           <Key>
@@ -83,11 +84,14 @@
           <Property Name="VoteNumber" Type="int" />
           <Property Name="CommentNumber" Type="int" />
           <Property Name="BuyNumber" Type="int" />
-          <Property Name="IsNew" Type="int" />
+          <Property Name="IsNew" Type="bit" />
           <Property Name="SupplierID" Type="int" />
           <Property Name="ProducerID" Type="int" />
           <Property Name="ProductTypeID" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Image1" Type="nvarchar(max)" />
+          <Property Name="Image2" Type="nvarchar(max)" />
+          <Property Name="image3" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -445,6 +449,7 @@
           <Property Name="IsPayed" Type="Boolean" />
           <Property Name="CustomerID" Type="Int32" />
           <Property Name="Preferential" Type="Int32" />
+          <Property Name="isCancel" Type="Boolean" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_DonDathang_KhachHang" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="TheOrderDetails" Relationship="Self.FK_ChiTietDonDatHang_DonDatHang" FromRole="Order" ToRole="TheOrderDetail" />
         </EntityType>
@@ -474,11 +479,14 @@
           <Property Name="VoteNumber" Type="Int32" />
           <Property Name="CommentNumber" Type="Int32" />
           <Property Name="BuyNumber" Type="Int32" />
-          <Property Name="IsNew" Type="Int32" />
+          <Property Name="IsNew" Type="Boolean" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="ProducerID" Type="Int32" />
           <Property Name="ProductTypeID" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Product" ToRole="Comment" />
           <NavigationProperty Name="Producer" Relationship="Self.FK_SanPham_NhaSanXuat" FromRole="Product" ToRole="Producer" />
           <NavigationProperty Name="TheOrderDetails" Relationship="Self.FK_ChiTietDonDatHang_SanPham" FromRole="Product" ToRole="TheOrderDetail" />
@@ -847,6 +855,7 @@
                 <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Preferential" ColumnName="Preferential" />
+                <ScalarProperty Name="isCancel" ColumnName="isCancel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -880,6 +889,9 @@
                 <ScalarProperty Name="ProducerID" ColumnName="ProducerID" />
                 <ScalarProperty Name="ProductTypeID" ColumnName="ProductTypeID" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Image1" ColumnName="Image1" />
+                <ScalarProperty Name="Image2" ColumnName="Image2" />
+                <ScalarProperty Name="image3" ColumnName="image3" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

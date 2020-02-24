@@ -5,14 +5,14 @@
         <h3 class="cate">Categories</h3>
     </div>
     <ul class="menu">
-        @foreach (var GroupNameType in Model.GroupBy(n => n.ProductType))
+        foreach (var GroupNameType in Model.GroupBy(n => n.ProductType))
         {
             <li class="item1">
-                <a href="#">@GroupNameType.Key.NameTypeProdcut </a>
+                <a href="@Url.Action("ViewAllProduct","Product",new { @typeProductID=GroupNameType.Key.ID})">@GroupNameType.Key.NameTypeProdcut </a>
                 <ul class="cute">
                     @foreach (var item in GroupNameType.GroupBy(n => n.Producer))
                     {
-                        <li class="subitem1"><a href="#">@item.Key.Name </a></li>
+                        <li class="subitem1"><a href="@Url.Action("ViewDetailProduct","Product", new {@productTypeID = GroupNameType.Key.ID , @producerID= item.Key.ID })">@item.Key.Name </a></li>
                     }
                 </ul>
             </li>
