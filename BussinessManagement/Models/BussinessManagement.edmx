@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BussinessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BussinessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="IDComment" />
@@ -13,6 +13,8 @@
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="IDMember" Type="int" />
           <Property Name="IDProduct" Type="int" />
+          <Property Name="DateComment" Type="datetime" />
+          <Property Name="Rate" Type="int" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -384,8 +386,7 @@
             <End Role="Member" EntitySet="Member" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BussinessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -399,6 +400,8 @@
           <Property Name="IDProduct" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Comment" ToRole="Product" />
           <NavigationProperty Name="Member" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Comment" ToRole="Member" />
+          <Property Name="DateComment" Type="DateTime" Precision="3" />
+          <Property Name="Rate" Type="Int32" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -803,6 +806,8 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="BussinessModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="DateComment" ColumnName="DateComment" />
                 <ScalarProperty Name="IDComment" ColumnName="IDComment" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="IDMember" ColumnName="IDMember" />

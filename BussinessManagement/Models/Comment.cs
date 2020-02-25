@@ -18,6 +18,8 @@ namespace BussinessManagement.Models
         public string Content { get; set; }
         public Nullable<int> IDMember { get; set; }
         public Nullable<int> IDProduct { get; set; }
+        public Nullable<System.DateTime> DateComment { get; set; }
+        public Nullable<int> Rate { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual Member Member { get; set; }
