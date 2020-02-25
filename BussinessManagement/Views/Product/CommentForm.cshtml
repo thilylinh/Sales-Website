@@ -1,0 +1,119 @@
+﻿@using BussinessManagement.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Comment>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3" style="border-right:solid 1px yellow;">
+            <div class="rating-block">
+                <h4 style="background-color:orange;padding:4px;">Average user rating</h4>
+                <hr />
+                <h2 class="bold padding-bottom-7">@ViewBag.RateTotal <small>/ 5</small></h2>
+                @for (int i = 0; i < ViewBag.RateTotal; i++)
+                {
+                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                }
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <h4 style="background-color:mediumspringgreen;padding:4px">Rating breakdown</h4>
+            <div class="pull-left">
+                <div class="pull-left" style="width:35px; line-height:1;">
+                    <div style="height:9px; margin:5px 0;">5 <span class="left"><i class="text-warning fa fa-star"></i></span></div>
+                </div>
+                <div class="pull-left" style="width:180px;">
+                    <div class="progress" style="height:9px; margin:8px 0;">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: @ViewBag.RatioR5%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="margin-left:10px;">@ViewBag.R5</div>
+            </div>
+            <div class="pull-left">
+                <div class="pull-left" style="width:35px; line-height:1;">
+                    <div style="height:9px; margin:5px 0;">4 <span class="left"><i class="text-warning fa fa-star"></i></span></div>
+                </div>
+                <div class="pull-left" style="width:180px;">
+                    <div class="progress" style="height:9px; margin:8px 0;">
+                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width:@ViewBag.RatioR4%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="margin-left:10px;">@ViewBag.R4</div>
+            </div>
+            <div class="pull-left">
+                <div class="pull-left" style="width:35px; line-height:1;">
+                    <div style="height:9px; margin:5px 0;">3 <span class="left"><i class="text-warning fa fa-star"></i></span></div>
+                </div>
+                <div class="pull-left" style="width:180px;">
+                    <div class="progress" style="height:9px; margin:8px 0;">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width:@ViewBag.RatioR3%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="margin-left:10px;">@ViewBag.R3</div>
+            </div>
+            <div class="pull-left">
+                <div class="pull-left" style="width:35px; line-height:1;">
+                    <div style="height:9px; margin:5px 0;">2 <span class="left"><i class="text-warning fa fa-star"></i></span></div>
+                </div>
+                <div class="pull-left" style="width:180px;">
+                    <div class="progress" style="height:9px; margin:8px 0;">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width:@ViewBag.RatioR2%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="margin-left:10px;">@ViewBag.R2</div>
+            </div>
+            <div class="pull-left">
+                <div class="pull-left" style="width:35px; line-height:1;">
+                    <div style="height:9px; margin:5px 0;">1 <span class="left"><i class="text-warning fa fa-star"></i></span></div>
+                </div>
+                <div class="pull-left" style="width:180px;">
+                    <div class="progress" style="height:9px; margin:8px 0;">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: @ViewBag.R1%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="margin-left:10px;">@ViewBag.R1</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-7">
+            <hr style="border-color:aqua;" />
+            <div class="review-block">
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+
+                            <div class="review-block-date">@item.DateComment.Value.ToString("dd/MM/yyyy")<br /></div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="review-block-name"><span>@item.Member.Name</span></div>
+                            <div class="review-block-rate">
+                                @for (int j = 0; j < item.Rate; j++)
+                                {
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                }
+                            </div>
+                            <div class="review-block-title">@item.Content</div>
+                        </div>
+                    </div>
+                    <hr style="border-color:gray;" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("CommentForm", new { page = page }))
+</div>
