@@ -141,6 +141,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderUserController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -300,6 +301,10 @@
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Product\CommentForm.cshtml" />
+    <Content Include="Views\OrderUser\NewOrder.cshtml" />
+    <Content Include="Views\OrderUser\OldOrder.cshtml" />
+    <Content Include="Views\OrderUser\Cancel.cshtml" />
+    <Content Include="Views\OrderUser\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

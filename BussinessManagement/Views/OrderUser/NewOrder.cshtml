@@ -1,0 +1,31 @@
+﻿@using BussinessManagement.Models;
+@model IEnumerable<Order>
+@{
+    ViewBag.Title = "NewOrder";
+    Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+    WebGrid grid = new WebGrid(source:Model,rowsPerPage:6);
+}
+<h2>Show order</h2>
+<hr />
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="@Url.Action("NewOrder","OrderUser")">New order</a></li>
+    <li role="presentation" ><a href="@Url.Action("OldOrder", "OrderUser")">Old order</a></li>
+
+</ul>
+
+<br />
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+            grid.Column("IDOrder", header: "ID"),
+        grid.Column("OrderDate", header: "Order date"),
+        grid.Column("isCancel", header: "Cancel"),
+        grid.Column(format: p => Html.ActionLink("Cancel", "Cancel", new { id = p.IDOrder }, new { @class = "btn btn-danger" }))
+        ))
+
+<link href="~/Content/admin/css/style-grid.css" rel="stylesheet" />
+

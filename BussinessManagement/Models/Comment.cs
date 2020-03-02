@@ -11,7 +11,8 @@ namespace BussinessManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Comment
     {
         public int IDComment { get; set; }
@@ -19,6 +20,7 @@ namespace BussinessManagement.Models
         public Nullable<int> IDMember { get; set; }
         public Nullable<int> IDProduct { get; set; }
         public Nullable<System.DateTime> DateComment { get; set; }
+        [Range(1,5)]
         public Nullable<int> Rate { get; set; }
     
         public virtual Product Product { get; set; }
