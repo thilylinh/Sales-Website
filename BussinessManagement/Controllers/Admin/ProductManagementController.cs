@@ -51,7 +51,6 @@ namespace BussinessManagement.Controllers.Admin
                         if (System.IO.File.Exists(path))
                         {
                             ViewBag.Error = "image is already exist";
-                            error++;
                             return View();
                         }
                         else
@@ -61,10 +60,7 @@ namespace BussinessManagement.Controllers.Admin
                     }
                 }
             }
-            if (error > 0)
-            {
-                return View(product);
-            }
+            
             product.Image = image[0].FileName;
             product.Image1 = image[1].FileName;
             product.Image2 = image[2].FileName;

@@ -135,9 +135,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\OrderManagementController.cs" />
+    <Compile Include="Controllers\Admin\ProducerManagementController.cs" />
     <Compile Include="Controllers\Admin\ProductManagementController.cs" />
     <Compile Include="Controllers\Admin\ReceiveVoucherController.cs" />
     <Compile Include="Controllers\Admin\StatisticsController.cs" />
+    <Compile Include="Controllers\Admin\SupplierManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -379,6 +381,12 @@
     <Content Include="Views\OrderManagement\Approve.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Shared\NavigationMenu.cshtml" />
+    <Content Include="Views\ProducerManagement\Index.cshtml" />
+    <Content Include="Views\ProducerManagement\Add.cshtml" />
+    <Content Include="Views\ProducerManagement\Edit.cshtml" />
+    <Content Include="Views\SupplierManagement\Index.cshtml" />
+    <Content Include="Views\SupplierManagement\Add.cshtml" />
+    <Content Include="Views\SupplierManagement\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

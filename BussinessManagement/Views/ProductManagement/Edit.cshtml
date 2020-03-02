@@ -8,14 +8,13 @@
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>tinymce.init({ selector: 'textarea' });</script>
 
-<h2>AddProduct</h2>
+<h3>Edit Product</h3>
 
 @using (Html.BeginForm("Edit", "ProductManagement", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.Hidden("ID",Model.ID);
