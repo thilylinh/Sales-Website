@@ -1,0 +1,18 @@
+﻿.gridTable{
+    width:100%;
+    border: 1px solid black;
+}
+.gridTable td{
+    border: 1px solid black;
+    text-align:center;
+}
+.gridHeader {
+    background-color: greenyellow;
+}
+.gridHeader > th > a {
+    color: #fff;
+    text-align:center;
+}
+.gridFooter{
+    font-weight:bold;
+}
