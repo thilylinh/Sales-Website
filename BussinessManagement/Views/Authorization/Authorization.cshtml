@@ -1,0 +1,79 @@
+﻿@using BussinessManagement.Models;
+@model MemberType
+@{
+    ViewBag.Title = "Authorization";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Authorization</h1>
+<h2 style="color:red;">Member type: <font color="orange">@Model.NameType</font></h2>
+<br />
+@{
+    IEnumerable<Role> lstRole = (IEnumerable<Role>)ViewBag.RoleID;
+    IEnumerable<MemberType_Role> lstAuthori = (IEnumerable<MemberType_Role>)ViewBag.MemberTypeRole;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("memberTypeID", Model.IDTypeMember)
+    if (lstAuthori != null)
+    {
+
+        for (int j = 0; j < lstRole.Count(); j++)
+        {
+            int k = 0;
+            for (int i = 0; i < lstAuthori.Count(); i++)
+            {
+                if (lstRole.ElementAt(j).ID == lstAuthori.ElementAt(i).RoleID)
+                {
+
+                    k++;
+                    break;
+                }
+            }
+            if (k != 0)
+            {
+                <div class="col-md-4" style="font-size:15pt;">
+
+                    <input class="ckb_click" checked="checked" style="width:20px;height:20px;" type="checkbox" name="@Url.Content("["+j+"].RoleID")" value="@lstRole.ElementAt(j).ID" />  @lstRole.ElementAt(j).Name
+                </div>
+            }
+            else
+            {
+                <div class="col-md-4" style="font-size:15pt;">
+
+                    <input class="ckb_click" style="width:20px;height:20px;" type="checkbox" name="@Url.Content("["+j+"].RoleID")" value="@lstRole.ElementAt(j).ID" />  @lstRole.ElementAt(j).Name
+                </div>
+            }
+            k = 0;
+        }
+    }
+    else
+    {
+       
+        for (int i = 0; i < lstRole.Count(); i++)
+        {
+          
+            <div class="col-md-4" style="font-size:15pt;">
+
+                <input class="ckb_click" style="width:20px;height:20px;" type="checkbox" name="@Url.Content("["+i+"].RoleID")" value="@lstRole.ElementAt(i).ID" />  @lstRole.ElementAt(i).Name
+            </div>
+
+        }
+    }
+    <div class="clearfix"></div>
+    <input type="submit" value="Thực hiện" class="btn btn-success" />
+}
+<br />
+@Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-primary" })
+<script>
+    $(".ckb_click").click(function () {
+        i = 0;
+        $(".ckb_click").each(function () {
+            if ($(this).is(':checked')) {
+                $(this).attr("name", "[" + i + "].RoleID");
+                i++;
+            }
+        })
+    })
+</script>

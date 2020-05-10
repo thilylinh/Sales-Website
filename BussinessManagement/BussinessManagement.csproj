@@ -57,6 +57,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -134,14 +140,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\AuthorizationController.cs" />
+    <Compile Include="Controllers\Admin\MemberManagementController.cs" />
     <Compile Include="Controllers\Admin\OrderManagementController.cs" />
     <Compile Include="Controllers\Admin\ProducerManagementController.cs" />
     <Compile Include="Controllers\Admin\ProductManagementController.cs" />
+    <Compile Include="Controllers\Admin\ProfileAdminController.cs" />
     <Compile Include="Controllers\Admin\ReceiveVoucherController.cs" />
+    <Compile Include="Controllers\Admin\StatisticMonthController.cs" />
     <Compile Include="Controllers\Admin\StatisticsController.cs" />
     <Compile Include="Controllers\Admin\SupplierManagementController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderUserController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProfileUserController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,6 +186,9 @@
     <Compile Include="Models\MemberType.cs">
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MemberType_Role.cs">
+      <DependentUpon>BussinessManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order.cs">
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
@@ -190,10 +207,7 @@
     <Compile Include="Models\ReceiveVoucherDetail.cs">
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>BussinessManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+    <Compile Include="Models\Role.cs">
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
@@ -205,9 +219,24 @@
     <Compile Include="Models\TheOrderDetail.cs">
       <DependentUpon>BussinessManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\ItemCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\admin\css\animate.css" />
     <Content Include="Content\admin\css\bootstrap.css" />
     <Content Include="Content\admin\css\clndr.css" />
@@ -304,15 +333,16 @@
     <Content Include="Content\js\memenu.js" />
     <Content Include="Content\js\responsiveslides.min.js" />
     <Content Include="Content\js\simpleCart.min.js" />
-    <Content Include="Content\ProductImage\camera1.jpg" />
-    <Content Include="Content\ProductImage\camera2.jpg" />
-    <Content Include="Content\ProductImage\camera3.jpg" />
-    <Content Include="Content\ProductImage\phone1.jpg" />
-    <Content Include="Content\ProductImage\phone2.png" />
-    <Content Include="Content\ProductImage\phone3.jpg" />
-    <Content Include="Content\ProductImage\laptop1.png" />
-    <Content Include="Content\ProductImage\Laptop2.png" />
-    <Content Include="Content\ProductImage\laptop3.png" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\ProductImage\16895-asus-d509da-ej285t-3.jpg" />
+    <Content Include="Content\ProductImage\31.jpg" />
+    <Content Include="Content\ProductImage\game.jpg" />
+    <Content Include="Content\ProductImage\P_setting_fff_1_90_end_600.jpg" />
+    <Content Include="Content\ProductImage\sony-xa1-ultra-hh-600x600.jpg" />
+    <Content Include="Content\ProductImage\sony-xperia-5-white-600x600.jpg" />
+    <Content Include="Content\ProductImage\sony-xperia-z4-black.png" />
+    <Content Include="Content\ProductImage\sony.jpg" />
+    <Content Include="Content\ProductImage\sony2.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -327,6 +357,13 @@
       <DependentUpon>BussinessManagement.edmx</DependentUpon>
       <LastGenOutput>BussinessManagement.cs</LastGenOutput>
     </Content>
+    <Content Include="obj\Debug\BussinessManagement.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\TempPE\Models.Bussiness.Context.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.Bussiness.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.Bussiness.Designer.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.BussinessManagement.Context.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.BussinessManagement.cs.dll" />
+    <Content Include="obj\Debug\TempPE\Models.BussinessManagement.Designer.cs.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\admin\fonts\fontawesome-webfont.eot" />
@@ -335,6 +372,16 @@
     <Content Include="Content\admin\fonts\FontAwesome.otf" />
     <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="obj\Debug\build.force" />
+    <Content Include="obj\Debug\BussinessManagement.csprojAssemblyReference.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Bussiness.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Bussiness.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\Bussiness.ssdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\BussinessManagement.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\BussinessManagement.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\BussinessManagement.ssdl" />
     <EntityDeploy Include="Models\BussinessManagement.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BussinessManagement.Designer.cs</LastGenOutput>
@@ -367,7 +414,6 @@
     <Content Include="Views\Product\ProductStyle1Partial.cshtml" />
     <Content Include="Views\Product\ProductStyle2Partial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\ProductManagement\Index.cshtml" />
     <Content Include="Views\ProductManagement\AddProduct.cshtml" />
     <Content Include="Views\ProductManagement\Edit.cshtml" />
@@ -387,9 +433,44 @@
     <Content Include="Views\SupplierManagement\Index.cshtml" />
     <Content Include="Views\SupplierManagement\Add.cshtml" />
     <Content Include="Views\SupplierManagement\Edit.cshtml" />
+    <Content Include="Views\Cart\CancelOrder.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Cart\CartView.cshtml" />
+    <Content Include="Views\Cart\EditCart.cshtml" />
+    <Content Include="Views\Cart\Notification.cshtml" />
+    <Content Include="Views\Cart\Order.cshtml" />
+    <Content Include="Views\OrderUser\Cancel.cshtml" />
+    <Content Include="Views\OrderUser\Comment.cshtml" />
+    <Content Include="Views\OrderUser\NewOrder.cshtml" />
+    <Content Include="Views\OrderUser\OldOrder.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_HeaderTop.cshtml" />
+    <Content Include="Views\Shared\_ProductLayout.cshtml" />
+    <Content Include="Views\Shared\_RegisterLayout.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
+    <Content Include="Views\Product\CommentForm.cshtml" />
+    <Content Include="Views\Product\ViewAllProduct.cshtml" />
+    <Content Include="Views\Product\ViewDetail.cshtml" />
+    <Content Include="Views\Product\ViewDetailProduct.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\ProfileUser\Profile.cshtml" />
+    <Content Include="Views\MemberManagement\Index.cshtml" />
+    <Content Include="Views\MemberManagement\Add.cshtml" />
+    <Content Include="Views\MemberManagement\Edit.cshtml" />
+    <Content Include="Views\Admin\AuthorizationError.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Shared\HeaderRightAdmin.cshtml" />
+    <Content Include="Views\ProfileAdmin\Profile.cshtml" />
+    <Content Include="Views\Authorization\Index.cshtml" />
+    <Content Include="Views\Authorization\Authorization.cshtml" />
+    <Content Include="Views\StatisticMonth\Index.cshtml" />
+    <Content Include="Views\StatisticMonth\Statistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\roslyn\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -3,54 +3,71 @@
 @{
     Layout = null;
 }
-    <div class="col-md-6 men">
-        <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(3).ID})" class="b-link-stripe b-animate-go  thickbox">
-            <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/" + @Model.ElementAt(3).Image)" alt="">
+<div class="col-md-6 men">
+    <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(3).ID})" class="b-link-stripe b-animate-go  thickbox">
+        <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/" + @Model.ElementAt(3).Image)" alt="">
+        <div class="b-wrapper">
+            <h5 class="b-animate b-from-top top-in   b-delay03 text-font-size-10">
+                <span>@Model.ElementAt(3).Config</span>
+            </h5>
+        </div>
+    </a>
+    <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(3).ID})">@Model.ElementAt(3).Name</a></h3>
+</div>
+<div class="col-md-6">
+    <div class="col-md1 ">
+        <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(0).ID})" class="b-link-stripe b-animate-go  thickbox">
+            <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/" + @Model.ElementAt(0).Image)" alt="">
             <div class="b-wrapper">
-                <h3 class="b-animate b-from-top top-in   b-delay03 ">
-                    <span>@Model.ElementAt(3).Config</span>
-                </h3>
+                <h5 class="b-animate b-from-top top-in1   b-delay03 text-font-size-8">
+                    <span>@Model.ElementAt(0).Config</span>
+                </h5>
             </div>
         </a>
-        <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(3).ID})">@Model.ElementAt(3).Name</a></h3>
+        <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(0).ID})">@Model.ElementAt(0).Name</a></h3>
     </div>
-    <div class="col-md-6">
-        <div class="col-md1 ">
-            <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(0).ID})" class="b-link-stripe b-animate-go  thickbox">
-                <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/" + @Model.ElementAt(0).Image)" alt="">
+    <div class="col-md2">
+        <div class="col-md-6 men1">
+            <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(1).ID})" class="b-link-stripe b-animate-go  thickbox">
+                <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+@Model.ElementAt(1).Image)" alt="">
                 <div class="b-wrapper">
-                    <h3 class="b-animate b-from-top top-in1   b-delay03 ">
-                        <span>@Model.ElementAt(0).Config</span>
-                    </h3>
+                    <h5 class="b-animate b-from-top top-in2   b-delay03 text-font-size-5">
+                        <span>@Model.ElementAt(1).Config</span>
+                    </h5>
                 </div>
             </a>
-            <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(0).ID})">@Model.ElementAt(0).Name</a></h3>
+            <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(1).ID})">@Model.ElementAt(1).Name</a></h3>
         </div>
-        <div class="col-md2">
-            <div class="col-md-6 men1">
-                <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(1).ID})" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+@Model.ElementAt(1).Image)" alt="">
-                    <div class="b-wrapper">
-                        <h3 class="b-animate b-from-top top-in2   b-delay03 ">
-                            <span>@Model.ElementAt(1).Config</span>
-                        </h3>
-                    </div>
-
-                </a>
-                <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(1).ID})">@Model.ElementAt(1).Name</a></h3>
-
-            </div>
-            <div class="col-md-6 men2">
-                <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(2).ID})" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+@Model.ElementAt(2).Image)" alt="">
-                    <div class="b-wrapper">
-                        <h3 class="b-animate b-from-top top-in2   b-delay03 ">
-                            <span>@Model.ElementAt(2).Config</span>
-                        </h3>
-                    </div>
-                </a>
-                <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(2).ID})">@Model.ElementAt(2).Name</a></h3>
-            </div>
-            <div class="clearfix"> </div>
+        <div class="col-md-6 men2">
+            <a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(2).ID})" class="b-link-stripe b-animate-go  thickbox">
+                <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+@Model.ElementAt(2).Image)" alt="">
+                <div class="b-wrapper">
+                    <h5 class="b-animate b-from-top top-in2   b-delay03 text-font-size-5">
+                        <span>@Model.ElementAt(2).Config</span>
+                    </h5>
+                </div>
+            </a>
+            <h3><a href="@Url.Action("ViewDetail","Product",new {id = Model.ElementAt(2).ID})">@Model.ElementAt(2).Name</a></h3>
         </div>
+        <div class="clearfix"> </div>
     </div>
+</div>
+<style>
+    .text-font-size-10 {
+        font-size: 10pt;
+        text-align: left;
+        padding:5px;
+    }
+
+    .text-font-size-5 {
+        font-size: 5pt;
+        text-align: left;
+        padding:2px;
+    }
+
+    .text-font-size-8 {
+        font-size: 8pt;
+        text-align: left;
+        padding:3px;
+    }
+</style>

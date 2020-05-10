@@ -2,6 +2,7 @@
 using BussinessManagement.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -164,26 +165,16 @@ namespace BussinessManagement.Controllers
         public ActionResult Order()
         {
             //add customer from member
-            Member member = Session["Member"] as Member;
-            if (Session["Member"] == null)
+            Customer customer = Session["Customer"] as Customer;
+            if (Session["Customer"] == null)
             {
                 return RedirectToAction("Login", "Home");
-            }
-            else
-            {
-                Customer customer = new Customer();
-                customer.Name = member.Name;
-                customer.Address = member.Address;
-                customer.Email = member.Email;
-                customer.PhoneNumber = member.PhoneNumber;
-                customer.IDMember = member.ID;
-                db.Customers.Add(customer);
-                db.SaveChanges();
             }
             if (Session["Cart"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
+            
            
             //save order
             Order order = new Order();
@@ -191,12 +182,27 @@ namespace BussinessManagement.Controllers
             order.Status = false;
             order.IsPayed = false;
             order.Preferential = 0;
-            order.CustomerID = member.ID;
+            order.CustomerID = customer.ID;
+            order.isCancel = false;
             db.Orders.Add(order);
             db.SaveChanges();
+            //change quantity product
+            
+
 
             //save order detail
             List<ItemCart>lstItemCart = GetCart();
+            foreach(var i in lstItemCart)
+            {
+                var product = db.Products.Where(n => n.ID == i.ID).SingleOrDefault();
+                product.Amount = product.Amount - i.Amount;
+                if (ModelState.IsValid)
+                {
+                    db.Entry(product).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                
+            }
             
             foreach(var item in lstItemCart)
             {
@@ -205,7 +211,7 @@ namespace BussinessManagement.Controllers
                 orderDetail.ProductID = item.ID;
                 orderDetail.ProductName = item.Name;
                 orderDetail.Amount = item.Amount;
-                orderDetail.Price = item.Price;
+                orderDetail.Price = item.Price * item.Amount;
                 db.TheOrderDetails.Add(orderDetail);
             }
 

@@ -407,7 +407,7 @@ height: 35px;
 	-o-transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	visibility: hidden;
-	font-size:1.1em;
+	font-size:0.5em;
 	font-weight:700;
 }
 .b-animate img{
@@ -416,8 +416,8 @@ height: 35px;
 }
 .b-animate span{
 	display:block;
-	font-size: 2em;
-	padding-top: 5em;
+	font-size: 1em;
+	padding-top: 3em;
 	display: block;
 	font-weight: 500;
 }
@@ -1783,7 +1783,7 @@ ul.qty li p{
   min-height: 492px;
 }
 .b-animate span {
-  padding-top: 4em;
+  padding-top: 2em;
 }
 .b-from-left {
   min-height: 288px;
@@ -1880,7 +1880,7 @@ h6.best2 {
   min-height: 553px;
 }
 .b-animate span {
-  padding-top: 3em;
+  padding-top: 2em;
 }
 .top-in span {
   padding: 8em 0 0;
@@ -1976,7 +1976,7 @@ a.cpns {
   padding: 2em 0;
 }
 .b-animate span {
-  padding-top: 2.5em;
+  padding-top: 2em;
 }
 .banner {
   min-height: 400px;
@@ -2063,7 +2063,7 @@ a.item_add p.number {
   min-height: 440px;
 }
 .b-animate span {
-  padding-top: 6em;
+  padding-top: 3em;
 }
 .top-in span {
   padding: 4.5em 0 0;
@@ -2339,8 +2339,8 @@ a.item_add p.number {
   padding: 0;
 }
 .b-animate span {
-  padding-top: 4.2em;
-  font-size: 1.6em;
+  padding-top: 3.2em;
+  font-size: 1em;
 }
 .b-from-left {
   min-height: 247px;

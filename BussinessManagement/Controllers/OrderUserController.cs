@@ -12,23 +12,23 @@ namespace BussinessManagement.Controllers
         // GET: OrderUser
         public ActionResult NewOrder()
         {
-            Member member = Session["Member"] as Member;
-            if (member == null)
+            Customer customer = Session["Customer"] as Customer;
+            if (customer == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            var order = db.Orders.Where(n => n.isCancel == false && n.CustomerID == member.ID);
+            var order = db.Orders.Where(n => n.isCancel == false && n.CustomerID == customer.ID);
             return View(order);
         }
 
         public ActionResult OldOrder()
         {
-            Member member = Session["Member"] as Member;
-            if (member == null)
+            Customer customer = Session["Customer"] as Customer;
+            if (customer == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            var order = db.TheOrderDetails.Where(n => n.Order.isCancel == true || (n.Order.IsPayed == true && n.Order.Status == true) && n.Order.CustomerID == member.ID);
+            var order = db.TheOrderDetails.Where(n => n.Order.isCancel == true || (n.Order.IsPayed == true && n.Order.Status == true) && n.Order.CustomerID == customer.ID);
             return View(order);
         }
 
@@ -78,8 +78,12 @@ namespace BussinessManagement.Controllers
         [HttpPost]
         public ActionResult Comment([Bind(Include = "IDProduct,Content,Rate")]Comment comment)
         {
-            Member member = Session["Member"] as Member;
-            comment.IDMember = member.ID;
+            Customer customer = Session["Customer"] as Customer;
+            if (customer == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            comment.IDCustomer = customer.ID;
             comment.DateComment = DateTime.Now;
             if (ModelState.IsValid)
             {

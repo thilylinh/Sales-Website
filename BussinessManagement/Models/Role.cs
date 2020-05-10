@@ -12,26 +12,18 @@ namespace BussinessManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Role()
         {
-            this.Comments = new HashSet<Comment>();
-            this.Orders = new HashSet<Order>();
+            this.MemberType_Role = new HashSet<MemberType_Role>();
         }
     
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Account { get; set; }
-        public string Pass { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<MemberType_Role> MemberType_Role { get; set; }
     }
 }

@@ -117,7 +117,14 @@ namespace BussinessManagement.Controllers
 
                 count++;
             }
-            ratingTotal = (5 * r5 + 4 * r4 + 3 * r3 + 2 * r2 + 1 * r1) / (r1 + r2 + r3 + r4 + r5);
+            if((r1 + r2 + r3 + r4 + r5) != 0)
+            {
+                ratingTotal = (5 * r5 + 4 * r4 + 3 * r3 + 2 * r2 + 1 * r1) / (r1 + r2 + r3 + r4 + r5);
+            }
+            else
+            {
+                ratingTotal = 0;
+            }
             ratioR1 = (double)((double)r1 / count) * 100;
             ratioR2 = (double)((double)r2 / count) * 100;
             ratioR3 = (double)((double)r3 / count) * 100;

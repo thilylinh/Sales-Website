@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BussinessManagement.Controllers.Admin
 {
+    [Authorize(Roles = "ManageProduct")]
     public class ProductManagementController : Controller
     {
         private BussinessEntities db = new BussinessEntities();

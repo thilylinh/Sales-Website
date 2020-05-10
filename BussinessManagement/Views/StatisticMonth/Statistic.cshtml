@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Statistic";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    WebGrid grid = new WebGrid(source: ViewBag.List, rowsPerPage: 10);
+}
+
+<h2>Statistic by month</h2>
+<hr />
+<div>
+    @using (Html.BeginForm("Statistic", "StatisticMonth", FormMethod.Post))
+    {
+        <label>Date from:</label>
+        <input type="date" name="date-from" />
+        <label>Date to:</label>
+        <input type="date" name="date-to" />
+        <input type="submit" value="Statistic" class="btn btn-success" />
+    }
+</div>
+<hr />
+<div class="row-one">
+    <div class="col-md-4 widget">
+        <div class="stats-left ">
+            <h5>Total</h5>
+            <h4>Money</h4>
+        </div>
+        <div class="stats-right">
+            <label>@ViewBag.StatisticMoney VND</label>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="col-md-4 widget states-mdl">
+        <div class="stats-left">
+            <h5>Total</h5>
+            <h4>Products</h4>
+        </div>
+        <div class="stats-right">
+            <label>@ViewBag.StatisticProduct</label>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="col-md-4 widget states-last">
+        <div class="stats-left">
+            <h5>Today</h5>
+            <h4>Orders</h4>
+        </div>
+        <div class="stats-right">
+            <label>@ViewBag.StatisticOrder</label>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<br />
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+            grid.Column("ProductName", header: "Product Name"),
+        grid.Column("Amount", header: "Quantity"),
+        grid.Column("Price", header: "Price"),
+        grid.Column("OrderDate", header: "Order date", format: p => p.Order.OrderDate),
+        grid.Column("isCancel", header: "Cancel", format: p => p.Order.isCancel)
+        ))
+
+<link href="~/Content/admin/css/style-grid.css" rel="stylesheet" />

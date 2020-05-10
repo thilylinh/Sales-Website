@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BussinessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BussinessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="IDComment" />
           </Key>
           <Property Name="IDComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="IDMember" Type="int" />
+          <Property Name="IDCustomer" Type="int" />
           <Property Name="IDProduct" Type="int" />
           <Property Name="DateComment" Type="datetime" />
           <Property Name="Rate" Type="int" />
@@ -25,13 +25,14 @@
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
-          <Property Name="IDMember" Type="int" />
+          <Property Name="Account" Type="varchar" MaxLength="50" />
+          <Property Name="Pass" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Account" Type="nvarchar" MaxLength="100" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
@@ -47,6 +48,15 @@
           <Property Name="IDTypeMember" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameType" Type="nvarchar" MaxLength="50" />
           <Property Name="Preferential" Type="int" />
+        </EntityType>
+        <EntityType Name="MemberType_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="MemberTypeID" />
+          </Key>
+          <Property Name="RoleID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberTypeID" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -109,7 +119,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProducerID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
@@ -122,6 +132,13 @@
           <Property Name="ProductID" Type="int" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Amount" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -164,18 +181,6 @@
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="IDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BinhLuan_ThanhVien">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="IDMember" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -227,6 +232,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Comment_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DonDathang_KhachHang">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -241,17 +258,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KhachHang_ToTable">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+        <Association Name="FK_MemberType_Role_Membertype">
+          <End Role="MemberType" Type="Self.MemberType" Multiplicity="1" />
+          <End Role="MemberType_Role" Type="Self.MemberType_Role" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Member">
+            <Principal Role="MemberType">
+              <PropertyRef Name="IDTypeMember" />
+            </Principal>
+            <Dependent Role="MemberType_Role">
+              <PropertyRef Name="MemberTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberType_Role_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="MemberType_Role" Type="Self.MemberType_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="IDMember" />
+            <Dependent Role="MemberType_Role">
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,7 +292,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ReceiveVoucher">
-              <PropertyRef Name="ProducerID" />
+              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -319,57 +346,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BussinessModelStoreContainer">
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MemberType" EntityType="Self.MemberType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberType_Role" EntityType="Self.MemberType_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiveVoucher" EntityType="Self.ReceiveVoucher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceiveVoucherDetail" EntityType="Self.ReceiveVoucherDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TheOrderDetail" EntityType="Self.TheOrderDetail" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BinhLuan_SanPham" Association="Self.FK_BinhLuan_SanPham">
             <End Role="Product" EntitySet="Product" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
-            <End Role="Member" EntitySet="Member" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_ChiTietDonDatHang_DonDatHang" Association="Self.FK_ChiTietDonDatHang_DonDatHang">
@@ -388,13 +382,21 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="ReceiveVoucherDetail" EntitySet="ReceiveVoucherDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_Comment_Customer" Association="Self.FK_Comment_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
           <AssociationSet Name="FK_DonDathang_KhachHang" Association="Self.FK_DonDathang_KhachHang">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_KhachHang_ToTable" Association="Self.FK_KhachHang_ToTable">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Customer" EntitySet="Customer" />
+          <AssociationSet Name="FK_MemberType_Role_Membertype" Association="Self.FK_MemberType_Role_Membertype">
+            <End Role="MemberType" EntitySet="MemberType" />
+            <End Role="MemberType_Role" EntitySet="MemberType_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberType_Role_Role" Association="Self.FK_MemberType_Role_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="MemberType_Role" EntitySet="MemberType_Role" />
           </AssociationSet>
           <AssociationSet Name="FK_PhieuNhap_ToTable" Association="Self.FK_PhieuNhap_ToTable">
             <End Role="Supplier" EntitySet="Supplier" />
@@ -417,7 +419,8 @@
             <End Role="Member" EntitySet="Member" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BussinessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -427,12 +430,12 @@
           </Key>
           <Property Name="IDComment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IDMember" Type="Int32" />
+          <Property Name="IDCustomer" Type="Int32" />
           <Property Name="IDProduct" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Comment" ToRole="Product" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Comment" ToRole="Member" />
           <Property Name="DateComment" Type="DateTime" Precision="3" />
           <Property Name="Rate" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_BinhLuan_SanPham" FromRole="Comment" ToRole="Product" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Comment_Customer" FromRole="Comment" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -443,15 +446,16 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="IDMember" Type="Int32" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_Customer" FromRole="Customer" ToRole="Comment" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_DonDathang_KhachHang" FromRole="Customer" ToRole="Order" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_KhachHang_ToTable" FromRole="Customer" ToRole="Member" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Account" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -459,8 +463,6 @@
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="IDTypeMember" Type="Int32" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK_BinhLuan_ThanhVien" FromRole="Member" ToRole="Comment" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_KhachHang_ToTable" FromRole="Member" ToRole="Customer" />
           <NavigationProperty Name="MemberType" Relationship="Self.FK_ThanhVien_ToTable" FromRole="Member" ToRole="MemberType" />
         </EntityType>
         <EntityType Name="MemberType">
@@ -471,6 +473,18 @@
           <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Preferential" Type="Int32" />
           <NavigationProperty Name="Members" Relationship="Self.FK_ThanhVien_ToTable" FromRole="MemberType" ToRole="Member" />
+          <NavigationProperty Name="MemberType_Role" Relationship="Self.FK_MemberType_Role_Membertype" FromRole="MemberType" ToRole="MemberType_Role" />
+        </EntityType>
+        <EntityType Name="MemberType_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="MemberTypeID" />
+          </Key>
+          <Property Name="RoleID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MemberTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberType" Relationship="Self.FK_MemberType_Role_Membertype" FromRole="MemberType_Role" ToRole="MemberType" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_MemberType_Role_Role" FromRole="MemberType_Role" ToRole="Role" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -486,7 +500,6 @@
           <Property Name="isCancel" Type="Boolean" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_DonDathang_KhachHang" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="TheOrderDetails" Relationship="Self.FK_ChiTietDonDatHang_DonDatHang" FromRole="Order" ToRole="TheOrderDetail" />
-          <Property Name="isCancel" Type="Boolean" />
         </EntityType>
         <EntityType Name="Producer">
           <Key>
@@ -544,7 +557,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProducerID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="ReceiveVoucherDetails" Relationship="Self.FK_ChiTietPhieuNhap_PhieNhap" FromRole="ReceiveVoucher" ToRole="ReceiveVoucherDetail" />
@@ -561,6 +574,14 @@
           <Property Name="Amount" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ChiTietPhieuNhap_SanPham" FromRole="ReceiveVoucherDetail" ToRole="Product" />
           <NavigationProperty Name="ReceiveVoucher" Relationship="Self.FK_ChiTietPhieuNhap_PhieNhap" FromRole="ReceiveVoucherDetail" ToRole="ReceiveVoucher" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberType_Role" Relationship="Self.FK_MemberType_Role_Role" FromRole="Role" ToRole="MemberType_Role" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -610,15 +631,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BinhLuan_ThanhVien">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+        <Association Name="FK_Comment_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Member">
+            <Principal Role="Customer">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Comment">
-              <PropertyRef Name="IDMember" />
+              <PropertyRef Name="IDCustomer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -636,20 +657,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KhachHang_ToTable">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="IDMember" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ThanhVien_ToTable">
           <End Role="MemberType" Type="Self.MemberType" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -661,6 +668,30 @@
             </Principal>
             <Dependent Role="Member">
               <PropertyRef Name="IDTypeMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberType_Role_Membertype">
+          <End Role="MemberType" Type="Self.MemberType" Multiplicity="1" />
+          <End Role="MemberType_Role" Type="Self.MemberType_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberType">
+              <PropertyRef Name="IDTypeMember" />
+            </Principal>
+            <Dependent Role="MemberType_Role">
+              <PropertyRef Name="MemberTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberType_Role_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="MemberType_Role" Type="Self.MemberType_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MemberType_Role">
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -758,7 +789,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ReceiveVoucher">
-              <PropertyRef Name="ProducerID" />
+              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -767,12 +798,14 @@
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="MemberTypes" EntityType="Self.MemberType" />
+          <EntitySet Name="MemberType_Role" EntityType="Self.MemberType_Role" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Producers" EntityType="Self.Producer" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
           <EntitySet Name="ReceiveVouchers" EntityType="Self.ReceiveVoucher" />
           <EntitySet Name="ReceiveVoucherDetails" EntityType="Self.ReceiveVoucherDetail" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TheOrderDetails" EntityType="Self.TheOrderDetail" />
@@ -780,21 +813,25 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_BinhLuan_ThanhVien" Association="Self.FK_BinhLuan_ThanhVien">
-            <End Role="Member" EntitySet="Members" />
+          <AssociationSet Name="FK_Comment_Customer" Association="Self.FK_Comment_Customer">
+            <End Role="Customer" EntitySet="Customers" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
           <AssociationSet Name="FK_DonDathang_KhachHang" Association="Self.FK_DonDathang_KhachHang">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_KhachHang_ToTable" Association="Self.FK_KhachHang_ToTable">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
           <AssociationSet Name="FK_ThanhVien_ToTable" Association="Self.FK_ThanhVien_ToTable">
             <End Role="MemberType" EntitySet="MemberTypes" />
             <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberType_Role_Membertype" Association="Self.FK_MemberType_Role_Membertype">
+            <End Role="MemberType" EntitySet="MemberTypes" />
+            <End Role="MemberType_Role" EntitySet="MemberType_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberType_Role_Role" Association="Self.FK_MemberType_Role_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="MemberType_Role" EntitySet="MemberType_Role" />
           </AssociationSet>
           <AssociationSet Name="FK_ChiTietDonDatHang_DonDatHang" Association="Self.FK_ChiTietDonDatHang_DonDatHang">
             <End Role="Order" EntitySet="Orders" />
@@ -828,48 +865,7 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="ReceiveVoucher" EntitySet="ReceiveVouchers" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BussinessModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BussinessModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -879,12 +875,12 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="BussinessModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="DateComment" ColumnName="DateComment" />
                 <ScalarProperty Name="IDComment" ColumnName="IDComment" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="IDMember" ColumnName="IDMember" />
+                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="DateComment" ColumnName="DateComment" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -896,7 +892,8 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="IDMember" ColumnName="IDMember" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -923,10 +920,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MemberType_Role">
+            <EntityTypeMapping TypeName="BussinessModel.MemberType_Role">
+              <MappingFragment StoreEntitySet="MemberType_Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="MemberTypeID" ColumnName="MemberTypeID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="BussinessModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="isCancel" ColumnName="isCancel" />
                 <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -988,7 +993,7 @@
             <EntityTypeMapping TypeName="BussinessModel.ReceiveVoucher">
               <MappingFragment StoreEntitySet="ReceiveVoucher">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ProducerID" ColumnName="ProducerID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
@@ -1002,6 +1007,14 @@
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BussinessModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1040,30 +1053,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BussinessModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BussinessModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BussinessModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BussinessModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BussinessModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BussinessModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BussinessModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BussinessModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BussinessModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

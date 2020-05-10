@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BussinessManagement.Controllers.Admin
 {
+    [Authorize(Roles = "RecieveVoucher")]
     public class ReceiveVoucherController : Controller
     {
         BussinessEntities db = new BussinessEntities();

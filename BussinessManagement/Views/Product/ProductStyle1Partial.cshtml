@@ -6,9 +6,9 @@
         <a href="@Url.Action("ViewDetail","Product",new {id = item.ID})" class="b-link-stripe b-animate-go  thickbox">
             <img class="img-responsive" src="@Url.Content("~/Content/ProductImage/"+item.Image)" alt="this is place image">
             <div class="b-wrapper">
-                <h3 class="b-animate b-from-left    b-delay03 ">
-                    <span>@item.Config</span>
-                </h3>
+                <h5 class="b-animate b-from-left    b-delay03" style="text-align:center;font-size:12pt; padding:7px;">
+                    @item.Config
+                </h5>
             </div>
         </a>
 

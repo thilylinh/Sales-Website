@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace BussinessManagement.Controllers.Admin
 {
+    [Authorize(Roles = "ManageSuplier")]
     public class SupplierManagementController : Controller
     {
         private BussinessEntities db = new BussinessEntities();

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+
 namespace BussinessManagement.Controllers
 {
     public class HomeController : Controller
@@ -28,48 +29,53 @@ namespace BussinessManagement.Controllers
             var lstProduct = db.Products;
             return PartialView(lstProduct);
         }
+
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include ="ID,Account,Password,Name,Address,Email,PhoneNumber")] Member member)
+        public ActionResult Register([Bind(Include = "ID,Name,Address,Email,PhoneNumber,Account,Pass")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Members.Add(member);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Login");
             }
-            return View(member);
+            return View(customer);
         }
+
         public ActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Member member)
+        public ActionResult Login(Customer customer)
         {
-            var ojectMember = db.Members.Where(m => m.Account == member.Account && m.Password == member.Password).SingleOrDefault();
+            var cus = db.Customers.Where(m => m.Account == customer.Account && m.Pass == customer.Pass).SingleOrDefault();
             if (ModelState.IsValid)
             {
-                if (ojectMember != null)
+                if (cus != null)
                 {
-                    Session["Member"] = ojectMember;
-                    FormsAuthentication.SetAuthCookie(member.Account, false);
+                    Session["Customer"] = cus;
+                    FormsAuthentication.SetAuthCookie(cus.Account, false);
                     return RedirectToAction("Index", "Home");
                 }
             }
-            ModelState.AddModelError("","login fail");
+            ModelState.AddModelError("", "login fail");
             return View();
         }
+
         public ActionResult Logout()
         {
-            Session["Member"] = null;
-            return RedirectToAction("Index","Home");
+            Session["Customer"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }

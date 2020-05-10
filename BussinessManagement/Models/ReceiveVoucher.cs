@@ -21,7 +21,7 @@ namespace BussinessManagement.Models
         }
     
         public int ID { get; set; }
-        public Nullable<int> ProducerID { get; set; }
+        public Nullable<int> SupplierID { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     

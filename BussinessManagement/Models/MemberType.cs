@@ -18,6 +18,7 @@ namespace BussinessManagement.Models
         public MemberType()
         {
             this.Members = new HashSet<Member>();
+            this.MemberType_Role = new HashSet<MemberType_Role>();
         }
     
         public int IDTypeMember { get; set; }
@@ -26,5 +27,7 @@ namespace BussinessManagement.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MemberType_Role> MemberType_Role { get; set; }
     }
 }

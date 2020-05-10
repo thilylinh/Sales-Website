@@ -12,10 +12,10 @@
         </div>
         <div class="header-left">
             <ul>
-                @if (Session["Member"] != null)
+                @if (Session["Customer"] != null)
                 {
-                    Member member = (Member)Session["Member"];
-                    <li style="color: white;border: 1px solid white;padding: 2px;">Hi @member.Name</li>
+                    Customer customer = (Customer)Session["Customer"];
+                    <li style="color: white;border: 1px solid white;padding: 2px;">Hi @customer.Name</li>
                     <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                 }
                 else
